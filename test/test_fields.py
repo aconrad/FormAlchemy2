@@ -32,3 +32,8 @@ class TestField(TestCase):
     def test_field_render_with_no_renderer(self):
         field = Field('name')
         self.assertRaises(NoRendererError, field.render)
+
+    def test_field_render_with_renderer(self):
+        field = Field('name')
+        field.renderer = Renderer()
+        assert isinstance(field.render(), unicode)
