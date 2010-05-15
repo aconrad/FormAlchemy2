@@ -10,4 +10,9 @@ class TestRenderer(TestCase):
 
     def test_renderer(self):
         renderer = Renderer()
-        self.assertRaises(NotImplementedError, renderer.render)
+        txt = renderer.render()
+        assert isinstance(txt, unicode)
+
+    def test_renderer_name(self):
+        renderer = Renderer()
+        assert renderer.name == 'dummy'
