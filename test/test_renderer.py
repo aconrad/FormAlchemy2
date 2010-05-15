@@ -3,14 +3,20 @@
 
 from unittest import TestCase
 
+from formalchemy2.fields import Field
 from formalchemy2.renderer import Renderer
 
 
 class TestRenderer(TestCase):
 
-    def test_renderer(self):
+    def test_render_with_no_field(self):
         renderer = Renderer()
-        txt = renderer.render()
+        self.assertRaises(TypeError, renderer.render)
+
+    def test_render_with_field(self):
+        field = Field('name')
+        renderer = Renderer()
+        txt = renderer.render(field)
         assert isinstance(txt, unicode)
 
     def test_renderer_name(self):

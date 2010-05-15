@@ -5,5 +5,5 @@ class Renderer(object):
 
     name = 'dummy'
 
-    def render(self):
+    def render(self, field):
         return u""

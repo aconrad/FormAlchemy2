@@ -21,4 +21,4 @@ class Field(object):
         """
         if not self.has_renderer():
             raise NoRendererError
-        return self.renderer.render()
+        return self.renderer.render(self)
