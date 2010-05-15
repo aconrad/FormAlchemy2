@@ -6,6 +6,7 @@ class Field(object):
     def __init__(self, id):
         self.id = id
         self.renderer = None
+        self.label = None
 
     def has_renderer(self):
         return isinstance(self.renderer, Renderer)

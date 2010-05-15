@@ -14,6 +14,12 @@ class TestField(TestCase):
         field = Field('unique')
         assert field.id == 'unique'
 
+    def test_field_label(self):
+        field = Field('unique')
+        assert field.label == None
+        field.label = 'label'
+        assert field.label == 'label'
+
     def test_has_renderer(self):
         field = Field('name')
         assert field.has_renderer() is False
