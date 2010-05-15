@@ -4,6 +4,8 @@
 from unittest import TestCase
 
 from formalchemy2.fields import Field
+from formalchemy2.renderer import Renderer
+from formalchemy2.exceptions import *
 
 
 class TestField(TestCase):
@@ -14,4 +16,4 @@ class TestField(TestCase):
 
     def test_field_render(self):
         field = Field('name')
-        self.assertRaises(NotImplementedError, field.render)
+        self.assertRaises(NoRendererError, field.render)
