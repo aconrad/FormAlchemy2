@@ -10,9 +10,9 @@ from formalchemy2.exceptions import *
 
 class TestField(TestCase):
 
-    def test_field(self):
-        field = Field('name')
-        assert field.id == 'name'
+    def test_field_id(self):
+        field = Field('unique')
+        assert field.id == 'unique'
 
     def test_has_renderer(self):
         field = Field('name')
