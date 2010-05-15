@@ -12,7 +12,10 @@ class Field(object):
         return isinstance(self.renderer, Renderer)
 
     def render(self):
-        """Call and return renderer's data."""
-        if self.renderer is None:
+        """Shortcut for field.renderer.render().
+
+        Raise NoRendererError if not renderer is set.
+        """
+        if not self.has_renderer():
             raise NoRendererError
         return self.renderer.render()
