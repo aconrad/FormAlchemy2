@@ -3,6 +3,8 @@ from formalchemy2.renderer import Renderer
 from formalchemy2.exceptions import *
 
 class Field(object):
+    """The base Field class."""
+
     def __init__(self, id):
         self.id = id
         self.renderer = None
