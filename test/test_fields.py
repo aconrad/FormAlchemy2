@@ -24,6 +24,11 @@ class TestField(TestCase):
         field = Field('name')
         assert field.has_renderer() is False
 
+    def test_set_renderer(self):
+        field = Field('name')
+        field.renderer = Renderer()
+        assert field.has_renderer() is True
+
     def test_field_render(self):
         field = Field('name')
         self.assertRaises(NoRendererError, field.render)
