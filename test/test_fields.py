@@ -41,4 +41,4 @@ class TestField(TestCase):
     def test_field_render_with_renderer(self):
         field = Field('name')
         field.renderer = Renderer()
-        assert isinstance(field.render(), unicode)
+        self.assertRaises(NotImplementedError, field.render)

@@ -14,10 +14,9 @@ class TestRenderer(TestCase):
         self.assertRaises(TypeError, renderer.render)
 
     def test_render_with_field(self):
-        field = Field('name')
+        field = Field('name', label='label', value='value')
         renderer = Renderer()
-        txt = renderer.render(field)
-        assert isinstance(txt, unicode)
+        self.assertRaises(NotImplementedError, renderer.render, field)
 
     def test_renderer_name(self):
         renderer = Renderer()

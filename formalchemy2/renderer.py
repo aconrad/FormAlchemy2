@@ -6,4 +6,4 @@ class Renderer(object):
     name = 'dummy'
 
     def render(self, field):
-        return u""
+        raise NotImplementedError
