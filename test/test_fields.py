@@ -17,7 +17,7 @@ class TestField(TestCase):
     def test_field_label(self):
         field = Field('unique')
         assert field.label == None
-        field.label = 'label'
+        field = Field('unique', label='label')
         assert field.label == 'label'
 
     def test_field_value(self):

@@ -5,10 +5,10 @@ from formalchemy2.exceptions import *
 class Field(object):
     """The base Field class."""
 
-    def __init__(self, id, value=None):
+    def __init__(self, id, label=None, value=None):
         self.id = id
         self.renderer = None
-        self.label = None
+        self.label = label
         self.value = value
 
     def has_renderer(self):
