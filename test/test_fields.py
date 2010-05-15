@@ -20,6 +20,12 @@ class TestField(TestCase):
         field.label = 'label'
         assert field.label == 'label'
 
+    def test_field_value(self):
+        field = Field('name')
+        assert field.value == None
+        field = Field('name', value='value')
+        assert field.value == 'value'
+
     def test_has_renderer(self):
         field = Field('name')
         assert field.has_renderer() is False
