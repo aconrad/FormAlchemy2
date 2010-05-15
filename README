@@ -2,8 +2,16 @@
 FormAlchemy2
 ============
 
-FormAlchemy2 generates forms, validates and stores input data to your favorite backend.
+FormAlchemy2 generates forms, validates and stores input data to your
+favorite backend.
 
-FormAlchemy2 is a rewrite of FormAlchemy. The first version of FormAlchemy was written to generate HTML forms given an SQLAlchemy mapped object. But later FormAlchemy also added support for other backends, like ZopeDB, CouchDB, etc... This was nice, but the design of FormAlchemy was still too coupled to SQLAlchemy and made it unpleasant to extend to other backends.
+FormAlchemy2 is a rewrite of FormAlchemy. The first version of FormAlchemy was
+written to generate HTML forms given an SQLAlchemy mapped object. But later
+FormAlchemy also added support for other backends, like ZopeDB, CouchDB,
+etc... This was nice, but the design of FormAlchemy was still too coupled to
+SQLAlchemy and made it unpleasant to extend to other backends.
 
-FormAlchemy2 is written to be extensible from the ground up by plugging any backend system you can think of. FormAlchemy2's core is meant to be reduced at the strict minimum and provide a developer-friendly API for manipulating forms using any backend you like.
+FormAlchemy2 is written to be extensible from the ground up by plugging any
+backend system you can think of. FormAlchemy2's core is meant to be reduced at
+the strict minimum and provide a developer-friendly API for manipulating forms
+using any backend you like.
