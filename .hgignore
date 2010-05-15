@@ -1,2 +1,4 @@
 syntax: glob
 *.pyc
+*.swp
+FormAlchemy2.egg-info
