@@ -13,5 +13,5 @@ class TestRenderer(TestCase):
         renderer = TextInput()
         out = renderer.render(field)
         assert isinstance(out, unicode)
-        assert u"input" in out
-        assert u"label" in out
+        assert u'input' in out
+        assert u'label' in out

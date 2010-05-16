@@ -4,7 +4,8 @@
 class Renderer(object):
     """The base Renderer class."""
 
-    name = 'dummy'
+    group = u'dummy'
+    name = u'dummy'
 
     def render(self, field):
         raise NotImplementedError

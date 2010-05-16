@@ -14,8 +14,8 @@ INPUT_TEXT = u"""\
 
 class TextInput(Renderer):
 
-    group = u"html5"
-    name = u"text_input"
+    group = u'html5'
+    name = u'text_input'
 
     def render(self, field):
         template = Template(INPUT_TEXT)
