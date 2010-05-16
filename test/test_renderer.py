@@ -17,7 +17,3 @@ class TestRenderer(TestCase):
         field = Field('name', label='label', value='value')
         renderer = Renderer()
         self.assertRaises(NotImplementedError, renderer.render, field)
-
-    def test_renderer_name(self):
-        renderer = Renderer()
-        assert renderer.name == 'dummy'
