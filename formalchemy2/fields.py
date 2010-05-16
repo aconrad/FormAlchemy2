@@ -2,9 +2,10 @@
 from formalchemy2.renderer import Renderer
 from formalchemy2.exceptions import *
 
+
 class Field(object):
     """The base Field class.
-    
+
     Takes the following arguments:
     * id: id of the field
 
@@ -32,9 +33,10 @@ class Field(object):
             raise NoRendererError
         return self.renderer.render(self)
 
+
 class FieldMultiChoice(Field):
     """The base Field for multi-choice value.
-    
+
     Takes the same arguments as Field, and the following:
     * choices: an iterable of (id, name) pair values
     """
