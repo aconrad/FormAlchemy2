@@ -3,7 +3,7 @@
 
 from unittest import TestCase
 
-from formalchemy2.fields import Field
+from formalchemy2.fields import Field, FieldMultiChoice
 from formalchemy2.renderer import Renderer
 from formalchemy2.exceptions import *
 
@@ -42,3 +42,14 @@ class TestField(TestCase):
         field = Field('name')
         field.renderer = Renderer()
         self.assertRaises(NotImplementedError, field.render)
+
+
+class TestFieldMultiChoice(TestField):
+
+    def test_field_choices(self):
+        menu = (
+            ('C6', '2 sushis, 6 california, 5 brochettes, riz'),
+            ('N', 'shirashi saumon'),
+            )
+        field = FieldMultiChoice('name', choices=menu)
+        assert field.choices == menu
