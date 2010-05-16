@@ -4,7 +4,7 @@
 from unittest import TestCase
 
 from formalchemy2.fields import Field
-from formalchemy2.renderer import Renderer
+from formalchemy2.renderers import Renderer
 
 
 class TestRenderer(TestCase):
