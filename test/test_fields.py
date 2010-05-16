@@ -47,6 +47,9 @@ class TestField(TestCase):
 class TestFieldMultiChoice(TestField):
 
     def test_field_choices(self):
+        # Make sure it breaks when 'choices' is not given.
+        self.assertRaises(ValueError, FieldMultiChoice, 'name')
+
         menu = (
             ('C6', '2 sushis, 6 california, 5 brochettes, riz'),
             ('N', 'shirashi saumon'),
