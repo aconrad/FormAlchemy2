@@ -43,6 +43,7 @@ class FieldMultiChoice(Field):
 
     def __init__(self, *args, **kwargs):
         if not 'choices' in kwargs:
-            raise ValueError("%s requires a 'choices' keyword argument." % (self.__class__.__name__))
+            raise ValueError("%s requires a 'choices' keyword argument." %
+                             self.__class__.__name__)
         self.choices = kwargs.pop('choices')
         super(FieldMultiChoice, self).__init__(*args, **kwargs)
