@@ -1,6 +1,6 @@
 #coding: utf-8
 from formalchemy2.renderer import Renderer
-from formalchemy2.exceptions import *
+from formalchemy2.exceptions import NoRendererError
 
 
 class Field(object):

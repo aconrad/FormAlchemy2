@@ -1,7 +1,5 @@
 #coding: utf-8
 
-__all__ = ['FormAlchemyError', 'RendererError', 'NoRendererError']
-
 
 class FormAlchemyError(Exception):
     """Generic error class."""
