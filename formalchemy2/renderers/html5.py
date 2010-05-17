@@ -5,10 +5,12 @@ from formalchemy2.renderers import Renderer
 
 
 INPUT_TEXT = u"""\
-% if field.label:
 <label for=${field.id}>${field.label}</label>
+% if field.value:
+<input id=${field.id} type=text value="${field.value}"/>
+% else:
+<input id=${field.id} type=text/>
 % endif
-<input id=${field.id} type=text value=${field.value or ""} />
 """
 
 
