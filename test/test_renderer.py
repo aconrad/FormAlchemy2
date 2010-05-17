@@ -21,5 +21,4 @@ class TestRenderer(TestCase, BaseRendererTest):
 
     def test_render_with_field(self):
         field = Field('name', label='label', value='value')
-        renderer = Renderer()
-        self.assertRaises(NotImplementedError, renderer.render, field)
+        self.assertRaises(NotImplementedError, self.renderer.render, field)

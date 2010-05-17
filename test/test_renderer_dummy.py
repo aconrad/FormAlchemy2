@@ -15,7 +15,6 @@ class TestDummyRenderer(TestCase, test_renderer.BaseRendererTest):
     renderer = Dummy()
 
     def test_field_render_with_renderer(self):
-        field = Field('name')
-        field.renderer = Dummy()
+        field = Field('name', renderer=self.renderer)
         out = field.render()
         assert field.id in out
