@@ -38,11 +38,6 @@ class TestField(TestCase):
         field = Field('name')
         self.assertRaises(NoRendererError, field.render)
 
-    def test_field_render_with_renderer(self):
-        field = Field('name')
-        field.renderer = Renderer()
-        self.assertRaises(NotImplementedError, field.render)
-
 
 class TestFieldMultiChoice(TestField):
 
