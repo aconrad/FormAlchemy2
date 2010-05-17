@@ -25,13 +25,14 @@ class TestForm(TestCase):
         form = Form()
         renderer = Dummy()
 
-        foo = Field('foo', renderer=renderer)
+        foo = Field('foo', label='Foo', value='fooval', renderer=renderer)
         assert foo.has_renderer()
         form.append(foo)
 
-        bar = Field('bar', renderer=renderer)
+        bar = Field('bar', label='Bar', value='barval', renderer=renderer)
         assert bar.has_renderer()
         form.append(bar)
 
         out = form.render()
-        print out
+        assert u"Bar (bar): barval" in out
+        assert u"Foo (foo): fooval" in out
