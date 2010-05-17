@@ -31,6 +31,6 @@ class TestRenderer(TestCase, MixinRendererTest):
     Renderer = Renderer
 
     def test_render_with_field(self):
-        field = Field('name', label='label', value='value')
+        field = Field('id', label='label', value='value')
         renderer = self.Renderer()
         assert isinstance(renderer.render(field), unicode)
