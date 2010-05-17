@@ -14,17 +14,23 @@ class MixinRendererTest(object):
     be instanciated on the 'renderer' attribute of the class.
     """
 
-    renderer = None
-
     def test_render_with_no_field(self):
-        self.assertRaises(TypeError, self.renderer.render)
+        renderer = self.Renderer()
+        self.assertRaises(TypeError, renderer.render)
+
+    def test_render_with_encoding(self):
+        renderer = self.Renderer()
+        assert renderer.encoding is None
+        renderer = self.Renderer(encoding='utf-8')
+        assert renderer.encoding == 'utf-8'
 
 
 class TestRenderer(TestCase, MixinRendererTest):
     """Test the Renderer class that other renderers will inherit from."""
 
-    renderer = Renderer()
+    Renderer = Renderer
 
     def test_render_with_field(self):
         field = Field('name', label='label', value='value')
-        assert isinstance(self.renderer.render(field), unicode)
+        renderer = self.Renderer()
+        assert isinstance(renderer.render(field), unicode)

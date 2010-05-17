@@ -12,9 +12,9 @@ import test_renderer
 
 class TestDummyRenderer(TestCase, test_renderer.MixinRendererTest):
 
-    renderer = Dummy()
+    Renderer = Dummy
 
     def test_field_render_with_renderer(self):
-        field = Field('name', renderer=self.renderer)
+        field = Field('name', renderer=self.Renderer())
         out = field.render()
         assert field.id in out
