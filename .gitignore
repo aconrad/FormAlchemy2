@@ -1,0 +1,5 @@
+*.pyc
+*.swp
+FormAlchemy2.egg-info
+.noseids
+.coverage
