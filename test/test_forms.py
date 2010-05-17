@@ -23,16 +23,13 @@ class TestForm(TestCase):
 
     def test_form_render(self):
         form = Form()
-        renderer = Dummy()
+        renderer = Renderer()
 
-        foo = Field('foo', label='Foo', value='fooval', renderer=renderer)
-        assert foo.has_renderer()
+        foo = Field('foo', renderer=renderer)
         form.append(foo)
 
-        bar = Field('bar', label='Bar', value='barval', renderer=renderer)
-        assert bar.has_renderer()
+        bar = Field('bar', renderer=renderer)
         form.append(bar)
 
-        out = form.render()
-        assert u"Bar (bar): barval" in out
-        assert u"Foo (foo): fooval" in out
+        output = form.render()
+        assert isinstance(output, basestring)
