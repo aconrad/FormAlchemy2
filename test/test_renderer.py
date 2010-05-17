@@ -9,7 +9,7 @@ from formalchemy2.renderers import Renderer
 
 class MixinRendererTest(object):
     """Mixin class for renderer tests.
-    
+
     This class should be used by all renderer tests. The tested renderer should
     be instanciated on the 'renderer' attribute of the class.
     """
