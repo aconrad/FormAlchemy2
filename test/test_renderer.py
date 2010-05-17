@@ -7,7 +7,7 @@ from formalchemy2.fields import Field
 from formalchemy2.renderers import Renderer
 
 
-class BaseRendererTest(object):
+class MixinRendererTest(object):
 
     renderer = None
 
@@ -15,7 +15,7 @@ class BaseRendererTest(object):
         self.assertRaises(TypeError, self.renderer.render)
 
 
-class TestRenderer(TestCase, BaseRendererTest):
+class TestRenderer(TestCase, MixinRendererTest):
 
     renderer = Renderer()
 

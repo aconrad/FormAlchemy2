@@ -10,7 +10,7 @@ from formalchemy2.renderers.dummy import Dummy
 import test_renderer
 
 
-class TestDummyRenderer(TestCase, test_renderer.BaseRendererTest):
+class TestDummyRenderer(TestCase, test_renderer.MixinRendererTest):
 
     renderer = Dummy()
 
