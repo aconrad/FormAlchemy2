@@ -12,7 +12,7 @@ class TestField(TestCase):
 
     def test_field_id(self):
         field = Field('id')
-        assert field.id == 'unique'
+        assert field.id == 'id'
 
     def test_field_label(self):
         field = Field('id')
