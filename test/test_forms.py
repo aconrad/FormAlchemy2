@@ -3,7 +3,7 @@
 from unittest import TestCase
 
 from formalchemy2.forms import Form
-from formalchemy2.renderers.dummy import Dummy
+from formalchemy2.renderers import Renderer
 from formalchemy2.fields import Field
 
 
