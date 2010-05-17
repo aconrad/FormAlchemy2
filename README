@@ -2,6 +2,8 @@
 FormAlchemy2
 ============
 
+(FormAlchemy2 is not production ready yet!)
+
 FormAlchemy2 generates forms, validates and stores input data to your
 favorite backend.
 
