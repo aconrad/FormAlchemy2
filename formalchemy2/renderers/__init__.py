@@ -11,6 +11,6 @@ class Renderer(object):
         self.encoding = encoding
 
     def render(self, field):
-        if isinstance(self.encoding, basestring):
-            return u"".encode(self.encoding)
-        return u""
+        if self.encoding is None:
+            return u""
+        return u"".encode(self.encoding)

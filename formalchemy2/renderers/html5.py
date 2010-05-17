@@ -4,7 +4,7 @@ from mako.template import Template
 from formalchemy2.renderers import Renderer
 
 
-INPUT_TEXT = u"""\
+TEXT_INPUT = u"""\
 <label for=${field.id}>${field.label}</label>
 % if field.value:
 <input id=${field.id} type=text value="${field.value}"/>
@@ -19,6 +19,10 @@ class TextInput(Renderer):
     group = u'html5'
     name = u'text_input'
 
+    _template = Template(TEXT_INPUT)
+
     def render(self, field):
-        template = Template(INPUT_TEXT)
-        return template.render_unicode(field=field)
+        output = self._template.render_unicode(field=field)
+        if self.encoding is None:
+            return output
+        return output.encode(self.encoding)
