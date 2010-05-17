@@ -12,7 +12,8 @@ class Field(object):
     Optional keyword arguments:
     * label (None): label of the field
     * value (None): value of the field
-    * renderer (None): renderer for this field
+    * renderer (None): renderer for this field. Renderers must subclass
+    formalchemy2.renderers.Renderer to be valid.
     """
 
     def __init__(self, id, label=None, value=None, renderer=None):
@@ -22,6 +23,7 @@ class Field(object):
         self.value = value
 
     def has_renderer(self):
+        """Return True if the field has a valid renderer."""
         return isinstance(self.renderer, Renderer)
 
     def render(self):
