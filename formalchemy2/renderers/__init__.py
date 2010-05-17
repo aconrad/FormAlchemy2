@@ -8,4 +8,4 @@ class Renderer(object):
     name = None
 
     def render(self, field):
-        raise NotImplementedError
+        return u""

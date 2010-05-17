@@ -27,4 +27,4 @@ class TestRenderer(TestCase, MixinRendererTest):
 
     def test_render_with_field(self):
         field = Field('name', label='label', value='value')
-        self.assertRaises(NotImplementedError, self.renderer.render, field)
+        assert isinstance(self.renderer.render(field), unicode)
