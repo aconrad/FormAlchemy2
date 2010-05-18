@@ -33,3 +33,5 @@ class TestSelectRenderer(TestCase, base_renderers.FieldMultiChoiceRendererMixin)
         field = FieldMultiChoice('id', choices=menu, label='my menu')
         renderer = self.Renderer()
         output = renderer.render(field)
+        assert u'california' in output
+        assert u'my menu' in output
