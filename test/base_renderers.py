@@ -25,13 +25,13 @@ class FieldRendererMixin(RendererMixin):
     """
 
     def test_render_unicode(self):
-        field = Field('id', label='label', value='value')
+        field = Field('id')
         renderer = self.Renderer()
         assert renderer.encoding is None
         assert isinstance(renderer.render(field), unicode)
 
     def test_render_with_encoding(self):
-        field = Field('id', label='label', value='value')
+        field = Field('id')
         renderer = self.Renderer(encoding='utf-8')
         assert renderer.encoding == 'utf-8'
         assert isinstance(renderer.render(field), str)
@@ -47,16 +47,14 @@ class FieldMultiChoiceRendererMixin(RendererMixin):
 
     def test_render_unicode(self):
         choices = (('foo', 'Foo'), ('bar', 'Bar'))
-        field = FieldMultiChoice('id', choices=choices, label='label',
-                                 value='value')
+        field = FieldMultiChoice('id', choices=choices)
         renderer = self.Renderer()
         assert renderer.encoding is None
         assert isinstance(renderer.render(field), unicode)
 
     def test_render_with_encoding(self):
         choices = (('foo', 'Foo'), ('bar', 'Bar'))
-        field = FieldMultiChoice('id', choices=choices, label='label',
-                                 value='value')
+        field = FieldMultiChoice('id', choices=choices)
         renderer = self.Renderer(encoding='utf-8')
         assert renderer.encoding == 'utf-8'
         assert isinstance(renderer.render(field), str)
