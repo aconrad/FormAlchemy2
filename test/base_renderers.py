@@ -2,6 +2,7 @@
 
 from formalchemy2.fields import Field, FieldMultiChoice
 
+
 class RendererMixin(object):
     """Mixin class for all renderer tests."""
 
