@@ -19,4 +19,4 @@ class TestFieldRenderer(TestCase, base_renderers.FieldRendererMixin):
 class TestFieldMultiChoiceRenderer(TestCase, base_renderers.FieldMultiChoiceRendererMixin):
     """Test the Renderer class that other renderers will inherit from."""
 
-    Renderer = FieldRenderer
+    Renderer = FieldMultiChoiceRenderer
