@@ -3,7 +3,6 @@
 
 from unittest import TestCase
 
-from formalchemy2.fields import Field
 from formalchemy2.renderers import FieldRenderer, FieldMultiChoiceRenderer
 
 # relative import
