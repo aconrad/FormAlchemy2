@@ -4,7 +4,21 @@ from mako.template import Template
 from formalchemy2.renderers import Renderer
 
 
-TEXT_INPUT = u"""\
+class MakoRenderer(Renderer):
+
+    def render(self, field):
+        output = self.template.render_unicode(field=field)
+        if self.encoding is None:
+            return output
+        return output.encode(self.encoding)
+
+
+class TextInput(MakoRenderer):
+
+    group = u'html5'
+    name = u'text_input'
+
+    TEMPLATE = u"""\
 <label for=${field.id}>${field.label}</label>
 % if field.value:
 <input id=${field.id} type=text value="${field.value}"/>
@@ -13,16 +27,25 @@ TEXT_INPUT = u"""\
 % endif
 """
 
+    template = Template(TEMPLATE)
 
-class TextInput(Renderer):
+
+class Select(MakoRenderer):
 
     group = u'html5'
-    name = u'text_input'
+    name = u'select'
 
-    _template = Template(TEXT_INPUT)
+    TEMPLATE = u"""\
+<label for=${field.id}>${field.label}</label>
+<select id=${field.id} name=${field.id}>
+% for (id, name) in field.choices:
+  % if field.value == id:
+  <option value="${id}" selected>${name}</option>
+  % else:
+  <option value="${id}">${name}</option>
+  % endif
+% endfor
+</select>
+"""
 
-    def render(self, field):
-        output = self._template.render_unicode(field=field)
-        if self.encoding is None:
-            return output
-        return output.encode(self.encoding)
+    template = Template(TEMPLATE)

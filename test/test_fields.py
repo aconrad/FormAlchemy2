@@ -48,6 +48,6 @@ class TestFieldMultiChoice(TestField):
         menu = (
             ('C6', '2 sushis, 6 california, 5 brochettes, riz'),
             ('N', 'shirashi saumon'),
-            )
+        )
         field = FieldMultiChoice('name', choices=menu)
         assert field.choices == menu

@@ -2,7 +2,7 @@
 
 
 class Renderer(object):
-    """The base Renderer class."""
+    """The base Renderer class for all renderers."""
 
     group = None
     name = None
@@ -14,3 +14,11 @@ class Renderer(object):
         if self.encoding is None:
             return u""
         return u"".encode(self.encoding)
+
+
+class FieldRenderer(Renderer):
+    """The base Renderer class for Field objects."""
+
+
+class FieldMultiChoiceRenderer(Renderer):
+    """The base Renderer class for FieldMultiChoice objects."""

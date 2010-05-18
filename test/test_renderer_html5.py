@@ -2,21 +2,34 @@
 
 from unittest import TestCase
 
-from formalchemy2.fields import Field
-from formalchemy2.renderers.html5 import TextInput
+from formalchemy2.fields import Field, FieldMultiChoice
+from formalchemy2.renderers.html5 import TextInput, Select
 
 # relative import
-import test_renderer
+import base_renderers
 
 
-class TestTextInputRenderer(TestCase, test_renderer.MixinRendererTest):
+class TestTextInputRenderer(TestCase, base_renderers.FieldRendererMixin):
 
     Renderer = TextInput
 
     def test_field_render(self):
         field = Field('id', label='my field')
         renderer = self.Renderer()
-        out = renderer.render(field)
-        assert isinstance(out, unicode)
-        assert u'label' in out
-        assert u'input' in out
+        output = renderer.render(field)
+        assert u'label' in output
+        assert u'input' in output
+
+
+class TestSelectRenderer(TestCase, base_renderers.FieldMultiChoiceRendererMixin):
+
+    Renderer = Select
+
+    def test_field_render(self):
+        menu = (
+            ('C6', '2 sushis, 6 california, 5 brochettes, riz'),
+            ('N', 'shirashi saumon'),
+        )
+        field = FieldMultiChoice('id', choices=menu, label='my menu')
+        renderer = self.Renderer()
+        output = renderer.render(field)
