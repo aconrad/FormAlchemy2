@@ -4,7 +4,7 @@
 from unittest import TestCase
 
 from formalchemy2.fields import Field, FieldMultiChoice
-from formalchemy2.renderers import Renderer
+from formalchemy2.renderers import FieldRenderer
 from formalchemy2.exceptions import NoRendererError
 
 
@@ -31,7 +31,8 @@ class TestField(TestCase):
         assert field.has_renderer() is False
 
     def test_set_renderer(self):
-        field = Field('id', renderer=Renderer())
+        renderer = FieldRenderer()
+        field = Field('id', renderer=renderer)
         assert field.has_renderer() is True
 
     def test_field_render_with_no_renderer(self):

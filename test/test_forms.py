@@ -3,7 +3,7 @@
 from unittest import TestCase
 
 from formalchemy2.forms import Form
-from formalchemy2.renderers import Renderer
+from formalchemy2.renderers import FieldRenderer
 from formalchemy2.fields import Field
 
 
@@ -23,7 +23,7 @@ class TestForm(TestCase):
 
     def test_form_render(self):
         form = Form()
-        renderer = Renderer()
+        renderer = FieldRenderer()
 
         foo = Field('foo', renderer=renderer)
         form.append(foo)
