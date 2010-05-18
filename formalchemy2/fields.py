@@ -1,5 +1,5 @@
 #coding: utf-8
-from formalchemy2.renderers import Renderer
+from formalchemy2.renderers import BaseRenderer
 from formalchemy2.exceptions import NoRendererError
 
 
@@ -12,24 +12,23 @@ class Field(object):
     Optional keyword arguments:
     * label (None): label of the field
     * value (None): value of the field
-    * renderer (None): renderer for this field. Renderers must subclass
-    formalchemy2.renderers.Renderer to be valid.
+    * renderer (None): a valid renderer for this field.
     """
 
     def __init__(self, id, label=None, value=None, renderer=None):
         self.id = id
-        self.renderer = renderer
         self.label = label
         self.value = value
+        self.renderer = renderer
 
     def has_renderer(self):
         """Return True if the field has a valid renderer."""
-        return isinstance(self.renderer, Renderer)
+        return isinstance(self.renderer, BaseRenderer)
 
     def render(self):
         """Shortcut for field.renderer.render().
 
-        Raise NoRendererError if not renderer is set.
+        Raise NoRendererError if no renderer is set.
         """
         if not self.has_renderer():
             raise NoRendererError

@@ -4,40 +4,43 @@
 from unittest import TestCase
 
 from formalchemy2.fields import Field, FieldMultiChoice
-from formalchemy2.renderers import FieldRenderer
+from formalchemy2.renderers import BaseRenderer
 from formalchemy2.exceptions import NoRendererError
 
 
 class TestField(TestCase):
 
-    def test_field_id(self):
+    def test_field_init(self):
         field = Field('id')
         assert field.id == 'id'
-
-    def test_field_label(self):
-        field = Field('id')
         assert field.label == None
-        field = Field('id', label='label')
-        assert field.label == 'label'
-
-    def test_field_value(self):
-        field = Field('id')
         assert field.value == None
-        field = Field('id', value='value')
-        assert field.value == 'value'
+        assert field.renderer == None
 
-    def test_has_renderer(self):
+    def test_field_init_with_args(self):
+        renderer = BaseRenderer()
+        field = Field('id', label='label', value='value', renderer=renderer)
+        assert field.id == 'id'
+        assert field.label == 'label'
+        assert field.value == 'value'
+        assert field.renderer == renderer
+
+    def test_field_has_renderer(self):
         field = Field('id')
         assert field.has_renderer() is False
 
-    def test_set_renderer(self):
-        renderer = FieldRenderer()
+        renderer = BaseRenderer()
         field = Field('id', renderer=renderer)
         assert field.has_renderer() is True
 
     def test_field_render_with_no_renderer(self):
         field = Field('id')
         self.assertRaises(NoRendererError, field.render)
+
+    def test_field_render_with_renderer(self):
+        renderer = BaseRenderer()
+        field = Field('id', renderer=renderer)
+        self.assertRaises(NotImplementedError, field.render)
 
 
 class TestFieldMultiChoice(TestField):

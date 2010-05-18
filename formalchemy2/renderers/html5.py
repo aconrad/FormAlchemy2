@@ -1,10 +1,10 @@
 #coding: utf-8
 from mako.template import Template
 
-from formalchemy2.renderers import Renderer
+from formalchemy2.renderers import BaseRenderer
 
 
-class MakoRenderer(Renderer):
+class MakoRenderer(BaseRenderer):
 
     def render(self, field):
         output = self.template.render_unicode(field=field)

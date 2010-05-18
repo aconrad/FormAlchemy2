@@ -1,10 +1,11 @@
 #coding: utf-8
 
-__all__ = ['FieldRenderer', 'FieldMultiChoiceRenderer']
 
+class BaseRenderer(object):
+    """The base Renderer class.
 
-class Renderer(object):
-    """The base Renderer class for all renderers."""
+    This class must be subclassed by all renderers.
+    """
 
     group = None
     name = None
@@ -13,14 +14,4 @@ class Renderer(object):
         self.encoding = encoding
 
     def render(self, field):
-        if self.encoding is None:
-            return u""
-        return u"".encode(self.encoding)
-
-
-class FieldRenderer(Renderer):
-    """The base Renderer class for Field objects."""
-
-
-class FieldMultiChoiceRenderer(Renderer):
-    """The base Renderer class for FieldMultiChoice objects."""
+        raise NotImplementedError
