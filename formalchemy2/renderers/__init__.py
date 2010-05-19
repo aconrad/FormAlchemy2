@@ -5,8 +5,8 @@ class BaseRenderer(object):
     """The base Renderer class.
 
     This class must be subclassed by all renderers.
-    """
 
+    """
     group = None
     name = None
 
