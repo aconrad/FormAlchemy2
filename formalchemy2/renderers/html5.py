@@ -3,6 +3,8 @@ from mako.template import Template
 
 from formalchemy2.renderers import BaseRenderer
 
+__all__ = [u'TextInput', u'Select']
+
 
 class MakoRenderer(BaseRenderer):
 
