@@ -3,9 +3,9 @@
 
 class Form(object):
     """The Form class.
-    
+
     Represents a set of fields that can be rendered in one shot.
-    
+
     """
     def __init__(self):
         self.fields = []
