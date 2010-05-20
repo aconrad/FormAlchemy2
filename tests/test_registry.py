@@ -7,9 +7,6 @@ from formalchemy2.renderers import BaseRenderer
 
 class TestRendererRegistry(TestCase):
 
-    def test_class(self):
-        assert RendererRegistry.renderers == {}
-
     def test_register(self):
 
         # Create a dummy renderer class
