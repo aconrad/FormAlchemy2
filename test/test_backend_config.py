@@ -3,10 +3,10 @@
 from unittest import TestCase
 from ConfigParser import SafeConfigParser
 
-from formalchemy2.backends.config import Config
+from formalchemy2.forms.config import Config
 
 
-class TestConfigBackend(TestCase):
+class TestConfigForm(TestCase):
 
     def test_init(self):
         config = SafeConfigParser()
