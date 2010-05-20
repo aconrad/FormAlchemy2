@@ -39,15 +39,14 @@ class Field(object):
 class FieldMultiChoice(Field):
     """The base Field for multi-choice value.
 
-    Takes the same arguments as Field, and the following:
-
-    Keyword arguments:
+    Arguments:
+    id -- id of the field
     choices -- an iterable of (id, name) pair values
 
+    Keyword arguments:
+    Takes the same keyword arguments as Field.
+
     """
-    def __init__(self, *args, **kwargs):
-        if not 'choices' in kwargs:
-            raise ValueError("%s requires a 'choices' keyword argument." %
-                             self.__class__.__name__)
-        self.choices = kwargs.pop('choices')
-        super(FieldMultiChoice, self).__init__(*args, **kwargs)
+    def __init__(self, id, choices, *args, **kwargs):
+        super(FieldMultiChoice, self).__init__(id, *args, **kwargs)
+        self.choices = choices

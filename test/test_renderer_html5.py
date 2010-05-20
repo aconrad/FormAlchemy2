@@ -40,14 +40,14 @@ class TestSelectRenderer(TestCase, MixinRendererTest):
 
     def test_render_unicode(self):
         choices = (('foo', 'Foo'), )
-        field = FieldMultiChoice('id', choices=choices, label='my choices')
+        field = FieldMultiChoice('id', choices, label='my choices')
         renderer = self.Renderer()
         output = renderer.render(field)
         assert isinstance(output, unicode)
 
     def test_render_encoding(self):
         choices = (('foo', 'Foo'), )
-        field = FieldMultiChoice('id', choices=choices, label='my choices')
+        field = FieldMultiChoice('id', choices, label='my choices')
         renderer = self.Renderer(encoding='utf-8')
         output = renderer.render(field)
         assert isinstance(output, str)
