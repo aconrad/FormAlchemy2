@@ -1,5 +1,6 @@
 #coding: utf-8
 
+from formalchemy2.fields import Field
 from formalchemy2.forms import Form
 
 
@@ -16,3 +17,10 @@ class Config(Form):
     def __init__(self, config, *args, **kwargs):
         super(Config, self).__init__(*args, **kwargs)
         self.config = config
+
+        # Populate fields from config options
+        for section in self.config.sections():
+            for option, value in self.config.items(section):
+                field_id = "%s-%s" % (section, option)
+                field = Field(field_id, label=option, value=value)
+                self.append(field)
