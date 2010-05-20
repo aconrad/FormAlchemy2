@@ -12,7 +12,7 @@ class TestConfigBackend(TestCase):
         config = SafeConfigParser()
         form = Config(config)
         assert form.config is config
-        assert form.fields == []
+        assert not form.fields
 
     def test_fields_from_config(self):
         config = SafeConfigParser()
@@ -20,7 +20,7 @@ class TestConfigBackend(TestCase):
         config.set('foo', 'key', 'value')
         form = Config(config)
         assert form.fields, 'No field found in form'
-        field = form.fields[0]
+        field = form.fields['foo-key']
         assert field.id == 'foo-key'
         assert field.value == 'value'
         assert field.label == 'key'

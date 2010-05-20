@@ -11,20 +11,28 @@ class TestForm(TestCase):
 
     def test_init(self):
         form = Form()
-        assert form.fields == []
+        assert not form.fields
 
     def test_add_field_to_form(self):
         form = Form()
-
-        foo = Field('foo')
-        form.append(foo)
-
-        assert foo in form.fields
+        field = Field('foo')
+        form.append(field)
+        assert form.fields
 
     def test_form_render(self):
         form = Form()
-
-        foo = Field('foo')
-        form.append(foo)
-
+        field = Field('foo')
+        form.append(field)
         self.assertRaises(NoRendererError, form.render)
+
+    def test_form_contains(self):
+        form = Form()
+        field = Field('foo')
+        form.append(field)
+        assert field in form
+
+    def test_for_len(self):
+        form = Form()
+        field = Field('foo')
+        form.append(field)
+        assert len(form) == 1
