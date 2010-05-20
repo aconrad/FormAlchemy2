@@ -16,11 +16,11 @@ class TestConfigForm(TestCase):
 
     def test_fields_from_config(self):
         config = SafeConfigParser()
-        config.add_section('foo')
-        config.set('foo', 'key', 'value')
+        config.add_section('section')
+        config.set('section', 'option', 'value')
         form = Config(config)
         assert form.fields, 'No field found in form'
-        field = form.fields['foo-key']
-        assert field.id == 'foo-key'
+        field = form.fields['section-option']
+        assert field.id == 'section-option'
+        assert field.label == 'option'
         assert field.value == 'value'
-        assert field.label == 'key'
