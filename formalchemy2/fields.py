@@ -6,7 +6,7 @@ from formalchemy2.exceptions import NoRendererError
 class Field(object):
     """The base Field class.
 
-    Takes the following arguments:
+    Arguments:
     id -- id of the field
 
     Keyword arguments:
