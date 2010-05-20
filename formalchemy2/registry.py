@@ -1,5 +1,7 @@
 #coding: utf-8
 
+from formalchemy2.exceptions import NoRendererError
+
 
 class RendererRegistry(object):
     """This class serves as the registry for renderers.
@@ -24,3 +26,29 @@ class RendererRegistry(object):
 
         d = cls.renderers.setdefault(group, {})
         d.update({name: renderer_cls})
+
+    @classmethod
+    def unregister(cls, renderer_group, renderer_name):
+        """Unregister a renderer given its group and name. Or raise NoRendererError."""
+        if renderer_group not in cls.renderers:
+            raise NoRendererError('Renderer with group "%s" and name "%s" is not registered.' % (renderer_group, renderer_name))
+
+        group = cls.renderers[renderer_group]
+
+        if renderer_name not in group:
+            raise NoRendererError('Renderer with group "%s" and name "%s" is not registered.' % (renderer_group, renderer_name))
+
+        del group[renderer_name]
+
+    @classmethod
+    def get_renderer(cls, renderer_group, renderer_name):
+        """Return a renderer given its group and name. Or raise NoRendererError."""
+        if renderer_group not in cls.renderers:
+            raise NoRendererError('Renderer with group "%s" and name "%s" is not registered.' % (renderer_group, renderer_name))
+
+        group = cls.renderers[renderer_group]
+
+        if renderer_name not in group:
+            raise NoRendererError('Renderer with group "%s" and name "%s" is not registered.' % (renderer_group, renderer_name))
+
+        return group[renderer_name]
