@@ -6,11 +6,15 @@ from formalchemy2.registry import RendererRegistry
 from formalchemy2.renderers import BaseRenderer
 from formalchemy2.exceptions import NoRendererError
 
+
 class DummyRenderer(BaseRenderer):
     """A dummy renderer."""
     group = 'dummy_group'
     name = 'dummy_name'
-    def render(self): return ""
+
+    def render(self):
+        return ""
+
 
 class TestRendererRegistry(TestCase):
 
@@ -46,27 +50,32 @@ class TestRendererRegistry(TestCase):
     def test_get_renderer_with_correct_group_and_incorrect_name(self):
         group = DummyRenderer.group
         name = "bar"
-        self.assertRaises(NoRendererError, RendererRegistry.get_renderer, group, name)
+        self.assertRaises(NoRendererError, RendererRegistry.get_renderer,
+                          group, name)
 
     def test_get_renderer_with_incorrect_group_and_incorrect_name(self):
         group = "foo"
         name = "bar"
-        self.assertRaises(NoRendererError, RendererRegistry.get_renderer, group, name)
+        self.assertRaises(NoRendererError, RendererRegistry.get_renderer,
+                          group, name)
 
     def test_get_unregistered_renderer(self):
         group = "foo"
         name = "bar"
-        self.assertRaises(NoRendererError, RendererRegistry.get_renderer, group, name)
+        self.assertRaises(NoRendererError, RendererRegistry.get_renderer,
+                          group, name)
 
     def test_unregister_correct_group_and_incorrect_name(self):
         group = DummyRenderer.group
         name = "bar"
-        self.assertRaises(NoRendererError, RendererRegistry.unregister, group, name)
+        self.assertRaises(NoRendererError, RendererRegistry.unregister,
+                          group, name)
 
     def test_unregister_incorrect_group_and_incorrect_name(self):
         group = "foo"
         name = "bar"
-        self.assertRaises(NoRendererError, RendererRegistry.unregister, group, name)
+        self.assertRaises(NoRendererError, RendererRegistry.unregister,
+                          group, name)
 
     def test_unregister_renderer(self):
         group = DummyRenderer.group

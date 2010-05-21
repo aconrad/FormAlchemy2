@@ -16,7 +16,8 @@ class Field(object):
     renderer -- a valid renderer for this field (default None)
 
     """
-    def __init__(self, id, label=None, value=None, choices=None, renderer=None):
+    def __init__(self, id, label=None, value=None, choices=None,
+                 renderer=None):
         self.id = id
         self.label = label
         self.value = value

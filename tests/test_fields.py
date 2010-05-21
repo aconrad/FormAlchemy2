@@ -24,7 +24,8 @@ class TestField(TestCase):
             ('C6', '2 sushis, 6 california, 5 brochettes, riz'),
             ('N', 'shirashi saumon'),
         )
-        field = Field('id', label='label', value='value', choices=menu, renderer=renderer)
+        field = Field('id', label='label', value='value', choices=menu,
+                      renderer=renderer)
         assert field.id == 'id'
         assert field.label == 'label'
         assert field.value == 'value'
