@@ -11,13 +11,15 @@ class TestConfigForm(TestCase):
     def test_init(self):
         config = SafeConfigParser()
         form = Config(config)
-        assert form.config is config
         assert not form.fields
 
     def test_fields_from_config(self):
+        # Setup config
         config = SafeConfigParser()
         config.add_section('section')
         config.set('section', 'option', 'value')
+
+        # Generate form from config
         form = Config(config)
         assert form.fields, 'No field found in form'
         field = form.fields['section-option']
