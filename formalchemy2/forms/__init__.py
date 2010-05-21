@@ -34,6 +34,6 @@ class Form(object):
         # Init output as str. If a field returns Unicode, output will be
         # overriden.
         output = ""
-        for field in self.fields.values():
+        for field in self:
             output += field.render()
         return output
