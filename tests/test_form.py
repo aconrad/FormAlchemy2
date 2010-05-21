@@ -31,7 +31,7 @@ class TestForm(TestCase):
         form.append(field)
         assert field in form
 
-    def test_for_len(self):
+    def test_form_len(self):
         form = Form()
         field = Field('foo')
         form.append(field)
