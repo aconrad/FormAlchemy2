@@ -4,7 +4,7 @@ from formalchemy2.fields import Field
 from formalchemy2.forms import Form
 
 
-class Config(Form):
+class ConfigForm(Form):
     """The Config form.
 
     Return a Form-like object whose fields are populated given a
@@ -15,7 +15,7 @@ class Config(Form):
 
     """
     def __init__(self, config, *args, **kwargs):
-        super(Config, self).__init__(*args, **kwargs)
+        super(ConfigForm, self).__init__(*args, **kwargs)
 
         # Populate fields from config options
         for section in config.sections():

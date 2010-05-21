@@ -3,14 +3,14 @@
 from unittest import TestCase
 from ConfigParser import SafeConfigParser
 
-from formalchemy2.forms.config import Config
+from formalchemy2.forms.config import ConfigForm
 
 
 class TestConfigForm(TestCase):
 
     def test_init(self):
         config = SafeConfigParser()
-        form = Config(config)
+        form = ConfigForm(config)
         assert not form.fields
 
     def test_fields_from_config(self):
@@ -20,7 +20,7 @@ class TestConfigForm(TestCase):
         config.set('section', 'option', 'value')
 
         # Generate form from config
-        form = Config(config)
+        form = ConfigForm(config)
         assert form.fields, 'No field found in form'
         field = form.fields['section-option']
         assert field.id == 'section-option'
