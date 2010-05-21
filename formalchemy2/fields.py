@@ -12,13 +12,15 @@ class Field(object):
     Keyword arguments:
     label -- label of the field (default None)
     value -- value of the field (default None)
+    choices -- an iterable of (id, name) pair values (default None)
     renderer -- a valid renderer for this field (default None)
 
     """
-    def __init__(self, id, label=None, value=None, renderer=None):
+    def __init__(self, id, label=None, value=None, choices=None, renderer=None):
         self.id = id
         self.label = label
         self.value = value
+        self.choices = choices
         self.renderer = renderer
 
     def has_renderer(self):
@@ -34,19 +36,3 @@ class Field(object):
         if not self.has_renderer():
             raise NoRendererError
         return self.renderer.render(self)
-
-
-class FieldMultiChoice(Field):
-    """The base Field for multi-choice value.
-
-    Arguments:
-    id -- id of the field
-    choices -- an iterable of (id, name) pair values
-
-    Keyword arguments:
-    Takes the same keyword arguments as Field.
-
-    """
-    def __init__(self, id, choices, *args, **kwargs):
-        super(FieldMultiChoice, self).__init__(id, *args, **kwargs)
-        self.choices = choices

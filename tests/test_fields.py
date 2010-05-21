@@ -3,7 +3,7 @@
 
 from unittest import TestCase
 
-from formalchemy2.fields import Field, FieldMultiChoice
+from formalchemy2.fields import Field
 from formalchemy2.renderers import BaseRenderer
 from formalchemy2.exceptions import NoRendererError
 
@@ -15,14 +15,20 @@ class TestField(TestCase):
         assert field.id == 'id'
         assert field.label == None
         assert field.value == None
+        assert field.choices == None
         assert field.renderer == None
 
     def test_field_init_with_args(self):
         renderer = BaseRenderer()
-        field = Field('id', label='label', value='value', renderer=renderer)
+        menu = (
+            ('C6', '2 sushis, 6 california, 5 brochettes, riz'),
+            ('N', 'shirashi saumon'),
+        )
+        field = Field('id', label='label', value='value', choices=menu, renderer=renderer)
         assert field.id == 'id'
         assert field.label == 'label'
         assert field.value == 'value'
+        assert field.choices == menu
         assert field.renderer == renderer
 
     def test_field_has_renderer(self):
@@ -41,17 +47,3 @@ class TestField(TestCase):
         renderer = BaseRenderer()
         field = Field('id', renderer=renderer)
         self.assertRaises(NotImplementedError, field.render)
-
-
-class TestFieldMultiChoice(TestField):
-
-    def test_field_choices(self):
-        # Make sure it breaks when 'choices' is not given.
-        self.assertRaises(TypeError, FieldMultiChoice, 'name')
-
-        menu = (
-            ('C6', '2 sushis, 6 california, 5 brochettes, riz'),
-            ('N', 'shirashi saumon'),
-        )
-        field = FieldMultiChoice('name', menu)
-        assert field.choices == menu

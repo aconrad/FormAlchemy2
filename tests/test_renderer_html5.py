@@ -2,7 +2,7 @@
 
 from unittest import TestCase
 
-from formalchemy2.fields import Field, FieldMultiChoice
+from formalchemy2.fields import Field
 from formalchemy2.renderers.html5 import TextInput, Select
 
 
@@ -39,15 +39,15 @@ class TestSelectRenderer(TestCase, MixinRendererTest):
     Renderer = Select
 
     def test_render_unicode(self):
-        choices = (('foo', 'Foo'), )
-        field = FieldMultiChoice('id', choices, label='my choices')
+        choices = [('foo', 'Foo')]
+        field = Field('id', label='my choices', choices=choices)
         renderer = self.Renderer()
         output = renderer.render(field)
         assert isinstance(output, unicode)
 
     def test_render_encoding(self):
-        choices = (('foo', 'Foo'), )
-        field = FieldMultiChoice('id', choices, label='my choices')
+        choices = [('foo', 'Foo')]
+        field = Field('id', label='my choices', choices=choices)
         renderer = self.Renderer(encoding='utf-8')
         output = renderer.render(field)
         assert isinstance(output, str)
