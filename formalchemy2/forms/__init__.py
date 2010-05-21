@@ -15,6 +15,9 @@ class Form(object):
     def __contains__(self, field):
         return field.id in self.fields
 
+    def __iter__(self):
+        return self.fields.itervalues()
+
     def __len__(self):
         return len(self.fields)
 

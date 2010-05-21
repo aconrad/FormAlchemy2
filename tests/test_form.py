@@ -36,3 +36,14 @@ class TestForm(TestCase):
         field = Field('foo')
         form.append(field)
         assert len(form) == 1
+
+    def test_form_field_iter(self):
+        form = Form()
+        foo = Field('foo')
+        form.append(foo)
+        bar = Field('bar')
+        form.append(bar)
+
+        fields = (foo, bar)
+        for field in form:
+            assert field in fields
