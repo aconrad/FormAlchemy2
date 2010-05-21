@@ -25,6 +25,10 @@ class Form(object):
         """Append a field to the form."""
         self.fields[field.id] = field
 
+    def remove(self, field):
+        """Remove field from the form."""
+        del self.fields[field.id]
+
     def render(self):
         """Return all fields rendered and concatenated."""
         # Init output as str. If a field returns Unicode, output will be

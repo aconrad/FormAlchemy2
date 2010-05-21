@@ -47,3 +47,11 @@ class TestForm(TestCase):
         fields = (foo, bar)
         for field in form:
             assert field in fields
+
+    def test_form_field_remove(self):
+        form = Form()
+        field = Field('foo')
+        form.append(field)
+        assert field in form
+        form.remove(field)
+        assert field not in form
