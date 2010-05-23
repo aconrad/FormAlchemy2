@@ -35,5 +35,5 @@ class Field(object):
 
         """
         if not self.has_renderer():
-            raise NoRendererError
+            raise NoRendererError('Field %s has no renderer assigned.' % self.id)
         return self.renderer.render(self)
