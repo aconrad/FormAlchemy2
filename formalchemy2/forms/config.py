@@ -14,8 +14,10 @@ class ConfigForm(Form):
     config -- a ConfigParser instance
 
     """
-    def __init__(self, config, *args, **kwargs):
+    def __init__(self, config, section=None, *args, **kwargs):
         super(ConfigForm, self).__init__(*args, **kwargs)
+
+        self.section = section
 
         # Populate fields from config options
         for section in config.sections():

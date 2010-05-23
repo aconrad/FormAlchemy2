@@ -12,6 +12,7 @@ class TestConfigForm(TestCase):
         config = SafeConfigParser()
         form = ConfigForm(config)
         assert not form.fields
+        assert form.section is None
 
     def test_fields_from_config(self):
         # Setup config
