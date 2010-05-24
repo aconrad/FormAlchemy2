@@ -23,9 +23,9 @@ class TextInput(MakoRenderer):
     TEMPLATE = u"""\
 <label for=${field.id}>${field.label}</label>
 % if field.value:
-<input id=${field.id} type=text value="${field.value}"/>
+<input id=${field.id} type=text name=${field.id} value="${field.value}"/>
 % else:
-<input id=${field.id} type=text/>
+<input id=${field.id} type=text name=${field.id}/>
 % endif
 """
 

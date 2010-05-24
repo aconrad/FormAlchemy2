@@ -52,6 +52,17 @@ class TestSelectRenderer(TestCase, MixinRendererTest):
         output = renderer.render(field)
         assert isinstance(output, str)
 
+    def test_output(self):
+        renderer = self.Renderer()
+        choices = [('foo', 'Foo')]
+        field = Field('id', choices=choices, renderer=renderer)
+        output = field.render()
+        assert 'name' in output
+        assert 'select' in output
+        assert 'option' in output
+        assert 'foo' in output
+
+
 class TestHiddenInputRenderer(TestCase, MixinRendererTest):
 
     Renderer = HiddenInput
