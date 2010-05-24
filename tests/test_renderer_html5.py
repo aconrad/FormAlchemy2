@@ -3,7 +3,7 @@
 from unittest import TestCase
 
 from formalchemy2.fields import Field
-from formalchemy2.renderers.html5 import TextInput, Select
+from formalchemy2.renderers.html5 import TextInput, HiddenInput, Select
 
 
 class MixinRendererTest(object):
@@ -51,3 +51,30 @@ class TestSelectRenderer(TestCase, MixinRendererTest):
         renderer = self.Renderer(encoding='utf-8')
         output = renderer.render(field)
         assert isinstance(output, str)
+
+class TestHiddenInputRenderer(TestCase, MixinRendererTest):
+
+    Renderer = HiddenInput
+
+    def test_render_unicode(self):
+        field = Field('id', label='_method', value='PUT')
+        renderer = self.Renderer()
+        output = renderer.render(field)
+        assert isinstance(output, unicode)
+
+    def test_render_encoding(self):
+        field = Field('id', label='_method', value='PUT')
+        renderer = self.Renderer(encoding='utf-8')
+        output = renderer.render(field)
+        assert isinstance(output, str)
+
+    def test_output(self):
+        renderer = self.Renderer()
+        field = Field('id', renderer=renderer)
+        output = field.render()
+        assert 'name' in output
+        assert 'type=hidden' in output
+        assert 'value' not in output
+        field = Field('id', value='PUT', renderer=renderer)
+        output = field.render()
+        assert 'value' in output
