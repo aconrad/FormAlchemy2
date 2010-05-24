@@ -64,3 +64,9 @@ class TestConfigForm(TestCase):
         form = ConfigForm(self.config, default_renderer=renderer)
         output = form.render()
         assert isinstance(output, basestring)
+
+    def test_prettifyer(self):
+        prettifyer = lambda txt: txt.replace('_', ' ').capitalize()
+        form = ConfigForm(self.config, prettifyer=prettifyer)
+        field = form.fields['foo-foo_option1']
+        assert field.label == 'Foo option1'
