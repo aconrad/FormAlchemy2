@@ -15,9 +15,11 @@ class ConfigForm(Form):
 
     Keyword arguments:
     sections -- an iterable of section names to be included
+    default_renderer -- a default renderer to be set to each generated field
 
     """
-    def __init__(self, config, sections=None, *args, **kwargs):
+    def __init__(self, config, sections=None, default_renderer=None,
+                 *args, **kwargs):
         super(ConfigForm, self).__init__(*args, **kwargs)
 
         # Put all fields when no section is given
@@ -28,5 +30,5 @@ class ConfigForm(Form):
         for section in sections:
             for option, value in config.items(section):
                 field_id = "%s-%s" % (section, option)
-                field = Field(field_id, label=option, value=value)
+                field = Field(field_id, label=option, value=value, renderer=default_renderer)
                 self.append(field)
