@@ -31,9 +31,7 @@ class Form(object):
 
     def render(self):
         """Return all fields rendered and concatenated."""
-        # Init output as str. If a field returns Unicode, output will be
-        # overriden.
-        output = ""
+        output = u""
         for field in self:
             output += field.render()
         return output
