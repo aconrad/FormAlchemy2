@@ -19,7 +19,7 @@ class TestField(TestCase):
     def test_field_init(self):
         field = Field('id')
         assert field.id == 'id'
-        assert field.label == None
+        assert field.label == 'id'
         assert field.value == None
         assert field.choices == None
         assert field.renderer == None

@@ -24,6 +24,16 @@ class Field(object):
         self.choices = choices
         self.renderer = renderer
 
+    def _get_label(self):
+        if self._label is None:
+            return self.id
+        return self._label
+
+    def _set_label(self, label):
+        self._label = label
+    
+    label = property(_get_label, _set_label)
+
     def has_renderer(self):
         """Return True if the field has a valid renderer."""
         return isinstance(self.renderer, BaseRenderer)
