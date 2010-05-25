@@ -7,8 +7,5 @@ class BaseRenderer(object):
     This class must be subclassed by all renderers.
 
     """
-    def __init__(self, encoding=None):
-        self.encoding = encoding
-
     def render(self, field):
         raise NotImplementedError

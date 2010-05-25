@@ -9,10 +9,7 @@ __all__ = [u'TextInput', u'Select', u'HiddenInput']
 class MakoRenderer(BaseRenderer):
 
     def render(self, field):
-        output = self.template.render_unicode(field=field)
-        if self.encoding is None:
-            return output
-        return output.encode(self.encoding)
+        return self.template.render_unicode(field=field)
 
 
 class TextInput(MakoRenderer):
