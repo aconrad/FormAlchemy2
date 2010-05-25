@@ -7,9 +7,6 @@ class BaseRenderer(object):
     This class must be subclassed by all renderers.
 
     """
-    group = None
-    name = None
-
     def __init__(self, encoding=None):
         self.encoding = encoding
 

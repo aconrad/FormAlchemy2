@@ -17,9 +17,6 @@ class MakoRenderer(BaseRenderer):
 
 class TextInput(MakoRenderer):
 
-    group = u'html5'
-    name = u'text_input'
-
     TEMPLATE = u"""\
 <label for=${field.id}>${field.label}</label>
 % if field.value:
@@ -46,9 +43,6 @@ class HiddenInput(MakoRenderer):
 
 
 class Select(MakoRenderer):
-
-    group = u'html5'
-    name = u'select'
 
     TEMPLATE = u"""\
 <label for=${field.id}>${field.label}</label>

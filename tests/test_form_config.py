@@ -10,9 +10,6 @@ from formalchemy2.exceptions import NoRendererError
 
 class DummyRenderer(BaseRenderer):
     """A dummy renderer."""
-    group = 'dummy'
-    name = 'dummy'
-
     def render(self, field):
         return ""
 
