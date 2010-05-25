@@ -14,7 +14,7 @@ class MakoRenderer(BaseRenderer):
 
 class TextInput(MakoRenderer):
 
-    TEMPLATE = u"""\
+    WIDGET = u"""\
 <label for=${field.id}>${field.label}</label>
 % if field.value:
 <input type=text id=${field.id} name=${field.id} value="${field.value}"/>
@@ -23,12 +23,12 @@ class TextInput(MakoRenderer):
 % endif
 """
 
-    template = Template(TEMPLATE)
+    template = Template(WIDGET)
 
 
 class HiddenInput(MakoRenderer):
 
-    TEMPLATE = u"""\
+    WIDGET = u"""\
 % if field.value:
 <input type=hidden id=${field.id} name=${field.id} value="${field.value}"/>
 % else:            
@@ -36,12 +36,12 @@ class HiddenInput(MakoRenderer):
 % endif
 """
 
-    template = Template(TEMPLATE)
+    template = Template(WIDGET)
 
 
 class Select(MakoRenderer):
 
-    TEMPLATE = u"""\
+    WIDGET = u"""\
 <label for=${field.id}>${field.label}</label>
 <select id=${field.id} name=${field.id}>
 % for (id, name) in field.choices:
@@ -54,4 +54,4 @@ class Select(MakoRenderer):
 </select>
 """
 
-    template = Template(TEMPLATE)
+    template = Template(WIDGET)
