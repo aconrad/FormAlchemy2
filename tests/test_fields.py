@@ -8,6 +8,15 @@ from formalchemy2.renderers import BaseRenderer
 from formalchemy2.exceptions import NoRendererError
 
 
+class DummyRenderer(BaseRenderer):
+    """A dummy renderer."""
+    group = 'dummy'
+    name = 'dummy'
+
+    def render(self, field):
+        return ""
+
+
 class TestField(TestCase):
 
     def test_field_init(self):
@@ -19,7 +28,7 @@ class TestField(TestCase):
         assert field.renderer == None
 
     def test_field_init_with_args(self):
-        renderer = BaseRenderer()
+        renderer = DummyRenderer()
         menu = (
             ('C6', '2 sushis, 6 california, 5 brochettes, riz'),
             ('N', 'shirashi saumon'),
@@ -36,7 +45,7 @@ class TestField(TestCase):
         field = Field('id')
         assert field.has_renderer() is False
 
-        renderer = BaseRenderer()
+        renderer = DummyRenderer()
         field = Field('id', renderer=renderer)
         assert field.has_renderer() is True
 
@@ -45,6 +54,16 @@ class TestField(TestCase):
         self.assertRaises(NoRendererError, field.render)
 
     def test_field_render_with_renderer(self):
-        renderer = BaseRenderer()
+        renderer = DummyRenderer()
         field = Field('id', renderer=renderer)
-        self.assertRaises(NotImplementedError, field.render)
+        output = field.render()
+        assert isinstance(output, basestring)
+
+    def test_field_set_renderer(self):
+        renderer = DummyRenderer()
+        field = Field('id', renderer=renderer)
+        assert field.has_renderer()
+        field = Field('id')
+        assert not field.has_renderer()
+        field.renderer = renderer
+        assert field.has_renderer()
