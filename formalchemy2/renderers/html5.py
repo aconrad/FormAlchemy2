@@ -17,9 +17,9 @@ class TextInput(MakoRenderer):
     TEMPLATE = u"""\
 <label for=${field.id}>${field.label}</label>
 % if field.value:
-<input id=${field.id} type=text name=${field.id} value="${field.value}"/>
+<input type=text id=${field.id} name=${field.id} value="${field.value}"/>
 % else:
-<input id=${field.id} type=text name=${field.id}/>
+<input type=text id=${field.id} name=${field.id}/>
 % endif
 """
 
@@ -30,9 +30,9 @@ class HiddenInput(MakoRenderer):
 
     TEMPLATE = u"""\
 % if field.value:
-<input id=${field.id} type=hidden name=${field.id} value="${field.value}"/>
-% else:
-<input id=${field.id} type=hidden name=${field.id}/>
+<input type=hidden id=${field.id} name=${field.id} value="${field.value}"/>
+% else:            
+<input type=hidden id=${field.id} name=${field.id}/>
 % endif
 """
 
