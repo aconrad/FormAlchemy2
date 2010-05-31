@@ -38,14 +38,6 @@ class TestField(TestCase):
         assert field.choices == menu
         assert field.renderer == renderer
 
-    def test_field_has_renderer(self):
-        field = Field('id')
-        assert field.has_renderer() is False
-
-        renderer = DummyRenderer()
-        field = Field('id', renderer=renderer)
-        assert field.has_renderer() is True
-
     def test_field_render_with_no_renderer(self):
         field = Field('id')
         self.assertRaises(NoRendererError, field.render)
@@ -59,8 +51,8 @@ class TestField(TestCase):
     def test_field_set_renderer(self):
         renderer = DummyRenderer()
         field = Field('id', renderer=renderer)
-        assert field.has_renderer()
+        assert field.renderer
         field = Field('id')
-        assert not field.has_renderer()
+        assert not field.renderer
         field.renderer = renderer
-        assert field.has_renderer()
+        assert field.renderer

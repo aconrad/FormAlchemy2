@@ -34,16 +34,12 @@ class Field(object):
     
     label = property(_get_label, _set_label)
 
-    def has_renderer(self):
-        """Return True if the field has a valid renderer."""
-        return isinstance(self.renderer, BaseRenderer)
-
     def render(self):
         """Shortcut for field.renderer.render().
 
         Raise NoRendererError if no renderer is set.
 
         """
-        if not self.has_renderer():
+        if not self.renderer:
             raise NoRendererError('Field %s has no renderer assigned.' % self.id)
         return self.renderer.render(self)
