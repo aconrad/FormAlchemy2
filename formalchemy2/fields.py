@@ -35,17 +35,18 @@ class Field(object):
 
     def _set_label(self, label):
         self._label = label
-    
+
     label = property(_get_label, _set_label)
 
     def validate(self):
         """Validate input_value against validator.
-        
+
         Raise NoValidatorError if no validator was set.
 
         """
         if self.validator is None:
-            raise NoValidatorError('Field %s has no validator assigned.' % self.id)
+            raise NoValidatorError('Field %s has no validator assigned.' %
+                                   self.id)
 
         return self.validator(self.input_value)
 
@@ -56,5 +57,6 @@ class Field(object):
 
         """
         if not self.renderer:
-            raise NoRendererError('Field %s has no renderer assigned.' % self.id)
+            raise NoRendererError('Field %s has no renderer assigned.' %
+                                  self.id)
         return self.renderer.render(self)

@@ -31,7 +31,7 @@ class HiddenInput(MakoRenderer):
     WIDGET = u"""\
 % if field.value:
 <input type=hidden id=${field.id} name=${field.id} value="${field.value}"/>
-% else:            
+% else:
 <input type=hidden id=${field.id} name=${field.id}/>
 % endif
 """

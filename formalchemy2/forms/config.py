@@ -32,5 +32,6 @@ class ConfigForm(Form):
                 field_id = "%s-%s" % (section, option)
                 if prettifyer:
                     option = prettifyer(option)
-                field = Field(field_id, label=option, value=value, renderer=default_renderer)
+                field = Field(field_id, label=option, value=value,
+                              renderer=default_renderer)
                 self.append(field)
