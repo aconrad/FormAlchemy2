@@ -5,7 +5,7 @@ from unittest import TestCase
 
 from formalchemy2.fields import Field
 from formalchemy2.renderers import BaseRenderer
-from formalchemy2.exceptions import NoRendererError
+from formalchemy2.exceptions import NoRendererError, NoValidatorError
 
 
 class DummyRenderer(BaseRenderer):
@@ -21,6 +21,7 @@ class TestField(TestCase):
         assert field.id == 'id'
         assert field.label == 'id'
         assert field.value == None
+        assert field.input_value == None
         assert field.choices == None
         assert field.renderer == None
 
@@ -31,11 +32,12 @@ class TestField(TestCase):
             ('N', 'shirashi saumon'),
         )
         field = Field('id', label='label', value='value', choices=menu,
-                      renderer=renderer)
+                      input_value='someinput', renderer=renderer)
         assert field.id == 'id'
         assert field.label == 'label'
         assert field.value == 'value'
         assert field.choices == menu
+        assert field.input_value == 'someinput'
         assert field.renderer == renderer
 
     def test_field_render_with_no_renderer(self):
@@ -56,3 +58,17 @@ class TestField(TestCase):
         assert not field.renderer
         field.renderer = renderer
         assert field.renderer
+
+    def test_field_validator_no_validator(self):
+        field = Field('id')
+        self.assertRaises(NoValidatorError, field.validate)
+
+    def test_field_validator_fail(self):
+        validator = lambda x: int(x)
+        field = Field('id', input_value="a", validator=validator)
+        self.assertRaises(ValueError, field.validate)
+
+    def test_field_validator_success(self):
+        validator = lambda x: int(x)
+        field = Field('id', input_value="10", validator=validator)
+        assert field.validate() == 10

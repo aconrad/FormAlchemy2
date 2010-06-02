@@ -11,3 +11,11 @@ class RendererError(FormAlchemyError):
 
 class NoRendererError(RendererError):
     """Raised when no renderer is set."""
+
+
+class ValidatorError(FormAlchemyError):
+    """Generic validator error."""
+
+
+class NoValidatorError(ValidatorError):
+    """Raised when no validator is set."""
