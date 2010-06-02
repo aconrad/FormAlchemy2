@@ -72,3 +72,10 @@ class TestField(TestCase):
         validator = lambda x: int(x)
         field = Field('id', input_value="10", validator=validator)
         assert field.validate() == 10
+
+    def test_field_value_validation(self):
+        validator = lambda x: int(x)
+        field = Field('id', input_value="10", validator=validator)
+        field.validate()
+        assert field.value is None
+        assert field.input_value is "10"

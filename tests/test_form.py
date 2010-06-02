@@ -55,3 +55,12 @@ class TestForm(TestCase):
         assert field in form
         form.remove(field)
         assert field not in form
+
+    def test_form_validate(self):
+        form = Form()
+        validator = lambda x: int(x)
+        field = Field('foo', input_value="10", validator=validator)
+        form.append(field)
+        field = Field('bar', input_value="3", validator=validator)
+        form.append(field)
+        assert form.validate() == {'foo': 10, 'bar': 3}
