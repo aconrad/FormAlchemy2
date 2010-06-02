@@ -11,10 +11,13 @@ class Form(object):
     Arguments:
     default_renderer -- the renderer used if a field doesn't have a
     renderer (default None).
+    default_validator -- the validator used if a field doesn't have a
+    validator (default None).
 
     """
-    def __init__(self, default_renderer=None):
+    def __init__(self, default_renderer=None, default_validator=None):
         self.default_renderer = default_renderer
+        self.default_validator = default_validator
         self.fields = OrderedDict()
 
     def __contains__(self, field):
@@ -30,6 +33,8 @@ class Form(object):
         """Append a field to the form."""
         if self.default_renderer and field.renderer is None:
             field.renderer = self.default_renderer
+        if self.default_validator and field.validator is None:
+            field.validator = self.default_validator
         self.fields[field.id] = field
 
     def remove(self, field):
@@ -45,7 +50,7 @@ class Form(object):
         containing field ids and their validated values.
 
         Arguments:
-        data -- a dict a fields ids and values to validate. Typically
+        data -- a dict of field ids and values to validate. Typically
         the content of an HTTP POST request.
 
         """

@@ -5,7 +5,7 @@ from unittest import TestCase
 from formalchemy2.forms import Form
 from formalchemy2.fields import Field
 from formalchemy2.renderers import BaseRenderer
-from formalchemy2.exceptions import NoRendererError
+from formalchemy2.exceptions import NoRendererError, NoValidatorError
 
 
 class DummyRenderer(BaseRenderer):
@@ -94,3 +94,18 @@ class TestForm(TestCase):
         output = form.render()
         assert isinstance(output, basestring)
         assert field.renderer is renderer
+
+    def test_validate_with_no_default_validator(self):
+        form = Form()
+        field = Field('foo')
+        form.append(field)
+        assert field.validator is None
+        self.assertRaises(NoValidatorError, form.validate, {'foo': '10'})
+
+    def test_validate_with_default_validator(self):
+        validator = int
+        form = Form(default_validator=validator)
+        field = Field('foo')
+        form.append(field)
+        assert field.validator is validator
+        assert form.validate({'foo': '10'}) == {'foo': 10}
