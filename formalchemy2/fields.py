@@ -1,5 +1,4 @@
 #coding: utf-8
-from formalchemy2.renderers import BaseRenderer
 from formalchemy2.exceptions import NoRendererError, NoValidatorError
 
 
