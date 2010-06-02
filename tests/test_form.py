@@ -4,7 +4,14 @@ from unittest import TestCase
 
 from formalchemy2.forms import Form
 from formalchemy2.fields import Field
+from formalchemy2.renderers import BaseRenderer
 from formalchemy2.exceptions import NoRendererError
+
+
+class DummyRenderer(BaseRenderer):
+    """A dummy renderer."""
+    def render(self, field):
+        return ""
 
 
 class TestForm(TestCase):
@@ -72,3 +79,18 @@ class TestForm(TestCase):
         field = Field('bar', value='Bar')
         form.append(field)
         assert form.data() == {'foo': 'Foo', 'bar': 'Bar'}
+
+    def test_render_with_no_default_renderer(self):
+        form = Form()
+        field = Field('foo', value='Foo')
+        form.append(field)
+        self.assertRaises(NoRendererError, form.render)
+
+    def test_render_with_default_renderer(self):
+        renderer = DummyRenderer()
+        form = Form(default_renderer=renderer)
+        field = Field('foo', value='Foo')
+        form.append(field)
+        output = form.render()
+        assert isinstance(output, basestring)
+        assert field.renderer is renderer

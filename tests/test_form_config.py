@@ -4,14 +4,7 @@ from unittest import TestCase
 from ConfigParser import SafeConfigParser
 
 from formalchemy2.forms.config import ConfigForm
-from formalchemy2.renderers import BaseRenderer
 from formalchemy2.exceptions import NoRendererError
-
-
-class DummyRenderer(BaseRenderer):
-    """A dummy renderer."""
-    def render(self, field):
-        return ""
 
 
 class TestConfigForm(TestCase):
@@ -51,16 +44,6 @@ class TestConfigForm(TestCase):
         form = ConfigForm(self.config, sections=['foo'])
         assert form.fields['foo-foo_option1']
         self.assertRaises(KeyError, form.fields.__getitem__, 'bar-bar_option1')
-
-    def test_render_with_no_default_renderer(self):
-        form = ConfigForm(self.config)
-        self.assertRaises(NoRendererError, form.render)
-
-    def test_render_with_default_renderer(self):
-        renderer = DummyRenderer()
-        form = ConfigForm(self.config, default_renderer=renderer)
-        output = form.render()
-        assert isinstance(output, basestring)
 
     def test_prettifyer(self):
         prettifyer = lambda txt: txt.replace('_', ' ').capitalize()

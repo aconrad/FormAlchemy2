@@ -8,8 +8,13 @@ class Form(object):
 
     Represents a set of fields that can be rendered in one shot.
 
+    Arguments:
+    default_renderer -- the renderer used if a field doesn't have a
+    renderer (default None).
+
     """
-    def __init__(self):
+    def __init__(self, default_renderer=None):
+        self.default_renderer = default_renderer
         self.fields = OrderedDict()
 
     def __contains__(self, field):
@@ -23,6 +28,8 @@ class Form(object):
 
     def append(self, field):
         """Append a field to the form."""
+        if self.default_renderer and field.renderer is None:
+            field.renderer = self.default_renderer
         self.fields[field.id] = field
 
     def remove(self, field):
