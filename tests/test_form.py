@@ -59,11 +59,11 @@ class TestForm(TestCase):
     def test_form_validate(self):
         form = Form()
         validator = lambda x: int(x)
-        field = Field('foo', input_value="10", validator=validator)
+        field = Field('foo', validator=validator)
         form.append(field)
-        field = Field('bar', input_value="3", validator=validator)
+        field = Field('bar', validator=validator)
         form.append(field)
-        assert form.validate() == {'foo': 10, 'bar': 3}
+        assert form.validate({'foo': '10', 'bar': '3'}) == {'foo': 10, 'bar': 3}
 
     def test_form_data(self):
         form = Form()

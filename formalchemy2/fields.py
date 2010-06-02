@@ -11,18 +11,16 @@ class Field(object):
     Keyword arguments:
     label -- label of the field (default None)
     value -- value of the field (default None)
-    input_value -- raw input value to be validated (default None)
     choices -- an iterable of (id, name) pair values (default None)
     renderer -- a renderer for this field (default None)
     validator -- a validator for this field (default None)
 
     """
     def __init__(self, id, label=None, value=None, choices=None,
-                 input_value=None, renderer=None, validator=None):
+                 renderer=None, validator=None):
         self.id = id
         self.label = label
         self.value = value
-        self.input_value = input_value
         self.choices = choices
         self.renderer = renderer
         self.validator = validator
@@ -37,8 +35,8 @@ class Field(object):
 
     label = property(_get_label, _set_label)
 
-    def validate(self):
-        """Validate input_value against validator.
+    def validate(self, value):
+        """Validate given value against validator.
 
         Raise NoValidatorError if no validator was set.
 
@@ -46,8 +44,7 @@ class Field(object):
         if self.validator is None:
             raise NoValidatorError('Field %s has no validator assigned.' %
                                    self.id)
-
-        return self.validator(self.input_value)
+        return self.validator(value)
 
     def render(self):
         """Shortcut for field.renderer.render().

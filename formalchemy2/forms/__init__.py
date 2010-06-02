@@ -33,14 +33,18 @@ class Form(object):
         """Return a dict containing all fields ids and values."""
         return dict((field.id, field.value) for field in self)
 
-    def validate(self):
-        """Validate all fields and return a dict containing field ids
-        and their validated values.
+    def validate(self, data):
+        """Validate input data against form fields and return a dict
+        containing field ids and their validated values.
+
+        Arguments:
+        data -- a dict a fields ids and values to validate. Typically
+        the content of an HTTP POST request.
 
         """
         validation = {}
         for field in self:
-            validation[field.id] = field.validate()
+            validation[field.id] = field.validate(data[field.id])
         return validation
 
     def render(self):

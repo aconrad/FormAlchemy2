@@ -21,7 +21,6 @@ class TestField(TestCase):
         assert field.id == 'id'
         assert field.label == 'id'
         assert field.value == None
-        assert field.input_value == None
         assert field.choices == None
         assert field.renderer == None
 
@@ -32,12 +31,11 @@ class TestField(TestCase):
             ('N', 'shirashi saumon'),
         )
         field = Field('id', label='label', value='value', choices=menu,
-                      input_value='someinput', renderer=renderer)
+                      renderer=renderer)
         assert field.id == 'id'
         assert field.label == 'label'
         assert field.value == 'value'
         assert field.choices == menu
-        assert field.input_value == 'someinput'
         assert field.renderer == renderer
 
     def test_field_render_with_no_renderer(self):
@@ -61,21 +59,20 @@ class TestField(TestCase):
 
     def test_field_validator_no_validator(self):
         field = Field('id')
-        self.assertRaises(NoValidatorError, field.validate)
+        self.assertRaises(NoValidatorError, field.validate, 'fake value')
 
     def test_field_validator_fail(self):
         validator = lambda x: int(x)
-        field = Field('id', input_value="a", validator=validator)
-        self.assertRaises(ValueError, field.validate)
+        field = Field('id', validator=validator)
+        self.assertRaises(ValueError, field.validate, 'a')
 
     def test_field_validator_success(self):
         validator = lambda x: int(x)
-        field = Field('id', input_value="10", validator=validator)
-        assert field.validate() == 10
+        field = Field('id', validator=validator)
+        assert field.validate('10') == 10
 
     def test_field_value_validation(self):
         validator = lambda x: int(x)
-        field = Field('id', input_value="10", validator=validator)
-        field.validate()
+        field = Field('id', validator=validator)
+        field.validate('10')
         assert field.value is None
-        assert field.input_value is "10"
