@@ -64,3 +64,11 @@ class TestForm(TestCase):
         field = Field('bar', input_value="3", validator=validator)
         form.append(field)
         assert form.validate() == {'foo': 10, 'bar': 3}
+
+    def test_form_data(self):
+        form = Form()
+        field = Field('foo', value='Foo')
+        form.append(field)
+        field = Field('bar', value='Bar')
+        form.append(field)
+        assert form.data() == {'foo': 'Foo', 'bar': 'Bar'}

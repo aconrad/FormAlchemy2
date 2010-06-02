@@ -29,6 +29,10 @@ class Form(object):
         """Remove field from the form."""
         del self.fields[field.id]
 
+    def data(self):
+        """Return a dict containing all fields ids and values."""
+        return dict((field.id, field.value) for field in self)
+
     def validate(self):
         """Validate all fields and return a dict containing field ids
         and their validated values.
