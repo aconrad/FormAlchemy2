@@ -44,9 +44,3 @@ class TestConfigForm(TestCase):
         form = ConfigForm(self.config, sections=['foo'])
         assert form.fields['foo-foo_option1']
         self.assertRaises(KeyError, form.fields.__getitem__, 'bar-bar_option1')
-
-    def test_prettifyer(self):
-        prettifyer = lambda txt: txt.replace('_', ' ').capitalize()
-        form = ConfigForm(self.config, prettifyer=prettifyer)
-        field = form.fields['foo-foo_option1']
-        assert field.label == 'Foo option1'

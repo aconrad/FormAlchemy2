@@ -17,8 +17,7 @@ class ConfigForm(Form):
     sections -- an iterable of section names to be included
 
     """
-    def __init__(self, config, sections=None,
-                 prettifyer=None, *args, **kwargs):
+    def __init__(self, config, sections=None, *args, **kwargs):
         super(ConfigForm, self).__init__(*args, **kwargs)
 
         # Put all fields when no section is given
@@ -29,7 +28,5 @@ class ConfigForm(Form):
         for section in sections:
             for option, value in config.items(section):
                 field_id = "%s-%s" % (section, option)
-                if prettifyer:
-                    option = prettifyer(option)
                 field = Field(field_id, label=option, value=value)
                 self.append(field)

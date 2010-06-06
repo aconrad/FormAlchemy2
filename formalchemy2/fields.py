@@ -9,29 +9,34 @@ class Field(object):
     id -- id of the field
 
     Keyword arguments:
-    label -- label of the field (default None)
+    label -- label of the field (default value of id)
     value -- value of the field (default None)
     choices -- an iterable of (id, name) pair values (default None)
     renderer -- a renderer for this field (default None)
     validator -- a validator for this field (default None)
+    prettifyer -- a label prettifyer (default None)
 
     """
     def __init__(self, id, label=None, value=None, choices=None,
-                 renderer=None, validator=None):
+                 renderer=None, validator=None, prettifyer=None):
         self.id = id
         self.label = label
         self.value = value
         self.choices = choices
         self.renderer = renderer
         self.validator = validator
+        self.prettifyer = prettifyer
 
     def _get_label(self):
-        if self._label is None:
-            return self.id
+        if self.prettifyer:
+            return self.prettifyer(self._label)
         return self._label
 
     def _set_label(self, label):
-        self._label = label
+        if label is None:
+            self._label = self.id
+        else:
+            self._label = label
 
     label = property(_get_label, _set_label)
 

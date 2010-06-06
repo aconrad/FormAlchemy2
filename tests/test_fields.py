@@ -23,20 +23,23 @@ class TestField(TestCase):
         assert field.value == None
         assert field.choices == None
         assert field.renderer == None
+        assert field.prettifyer == None
 
     def test_field_init_with_args(self):
         renderer = DummyRenderer()
+        prettifyer = lambda x: x.capitalize()
         menu = (
             ('C6', '2 sushis, 6 california, 5 brochettes, riz'),
             ('N', 'shirashi saumon'),
         )
         field = Field('id', label='label', value='value', choices=menu,
-                      renderer=renderer)
+                      renderer=renderer, prettifyer=prettifyer)
         assert field.id == 'id'
-        assert field.label == 'label'
+        assert field.label == 'Label'
         assert field.value == 'value'
         assert field.choices == menu
         assert field.renderer == renderer
+        assert field.prettifyer == prettifyer
 
     def test_field_render_with_no_renderer(self):
         field = Field('id')
@@ -76,3 +79,8 @@ class TestField(TestCase):
         field = Field('id', validator=validator)
         field.validate('10')
         assert field.value is None
+
+    def test_field_prettifyer(self):
+        prettifyer = lambda x: x.replace('_', ' ').capitalize()
+        field = Field('some_id', prettifyer=prettifyer)
+        field.label == 'Some id'

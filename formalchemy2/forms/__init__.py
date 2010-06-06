@@ -15,9 +15,11 @@ class Form(object):
     validator (default None).
 
     """
-    def __init__(self, default_renderer=None, default_validator=None):
+    def __init__(self, default_renderer=None, default_validator=None,
+                 default_prettifyer=None):
         self.default_renderer = default_renderer
         self.default_validator = default_validator
+        self.default_prettifyer = default_prettifyer
         self.fields = OrderedDict()
 
     def __contains__(self, field):
@@ -35,6 +37,8 @@ class Form(object):
             field.renderer = self.default_renderer
         if self.default_validator and field.validator is None:
             field.validator = self.default_validator
+        if self.default_prettifyer and field.prettifyer is None:
+            field.prettifyer = self.default_prettifyer
         self.fields[field.id] = field
 
     def remove(self, field):

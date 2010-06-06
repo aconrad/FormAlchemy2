@@ -19,6 +19,9 @@ class TestForm(TestCase):
     def test_init(self):
         form = Form()
         assert not form.fields
+        assert form.default_renderer is None
+        assert form.default_validator is None
+        assert form.default_prettifyer is None
 
     def test_add_field_to_form(self):
         form = Form()
@@ -109,3 +112,12 @@ class TestForm(TestCase):
         form.append(field)
         assert field.validator is validator
         assert form.validate({'foo': '10'}) == {'foo': 10}
+
+    def test_default_prettifyer(self):
+        prettifyer = lambda txt: txt.replace('_', ' ').capitalize()
+        form = Form(default_prettifyer=prettifyer)
+        form.default_prettifyer is prettifyer
+        field = Field('foo')
+        assert field.prettifyer is None
+        form.append(field)
+        assert field.prettifyer is prettifyer
