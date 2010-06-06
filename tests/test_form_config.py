@@ -28,6 +28,7 @@ class TestConfigForm(TestCase):
 
     def test_init(self):
         form = ConfigForm(self.config)
+        assert form.config is self.config
         assert form.fields, 'No field found in form'
         field = form.fields['foo-foo_option1']
         assert field.id == 'foo-foo_option1'
