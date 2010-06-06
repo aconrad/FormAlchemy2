@@ -22,6 +22,18 @@ class TestForm(TestCase):
         assert form.default_renderer is None
         assert form.default_validator is None
         assert form.default_prettifyer is None
+        assert form.input_data is None
+
+    def test_init_with_args(self):
+        renderer = DummyRenderer()
+        validator = int
+        prettifyer = lambda x: x.capitalize()
+        form = Form(default_renderer=renderer, default_validator=validator,
+                    default_prettifyer=prettifyer)
+        assert form.default_renderer is renderer
+        assert form.default_validator is validator
+        assert form.default_prettifyer is prettifyer
+        assert form.input_data is None
 
     def test_add_field_to_form(self):
         form = Form()
@@ -102,7 +114,6 @@ class TestForm(TestCase):
         form = Form()
         field = Field('foo')
         form.append(field)
-        assert field.validator is None
         self.assertRaises(NoValidatorError, form.validate, {'foo': '10'})
 
     def test_validate_with_default_validator(self):
@@ -110,13 +121,11 @@ class TestForm(TestCase):
         form = Form(default_validator=validator)
         field = Field('foo')
         form.append(field)
-        assert field.validator is validator
         assert form.validate({'foo': '10'}) == {'foo': 10}
 
     def test_default_prettifyer(self):
         prettifyer = lambda txt: txt.replace('_', ' ').capitalize()
         form = Form(default_prettifyer=prettifyer)
-        form.default_prettifyer is prettifyer
         field = Field('foo')
         assert field.prettifyer is None
         form.append(field)

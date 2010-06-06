@@ -15,6 +15,9 @@ class Form(object):
     validator (default None).
 
     """
+
+    input_data = None
+
     def __init__(self, default_renderer=None, default_validator=None,
                  default_prettifyer=None):
         self.default_renderer = default_renderer
@@ -58,6 +61,8 @@ class Form(object):
         the content of an HTTP POST request.
 
         """
+        self.input_data = data
+
         validation = {}
         for field in self:
             validation[field.id] = field.validate(data[field.id])
