@@ -43,3 +43,14 @@ class TestConfigForm(TestCase):
         form = ConfigForm(self.config, sections=['foo'])
         assert form.fields['foo-foo_option1']
         self.assertRaises(KeyError, form.fields.__getitem__, 'bar-bar_option1')
+
+    def test_validate_and_sync(self):
+        form = ConfigForm(self.config, sections=['foo'], default_validator=int)
+        data = {'foo-foo_option1': '10', 'foo-foo_option2': '3'}
+        form.data = data
+        form.validate()
+        form.sync(self.config)
+        assert self.config.get('foo', 'foo_option1') == '10'
+        assert self.config.get('foo', 'foo_option2') == '3'
+        assert self.config.get('bar', 'bar_option1') == 'bar_value1'
+        assert self.config.get('bar', 'bar_option2') == 'bar_value2'

@@ -31,3 +31,9 @@ class ConfigForm(Form):
                 field_id = "%s-%s" % (section, option)
                 field = Field(field_id, label=option, value=value)
                 self.append(field)
+
+    def sync(self, config):
+        """Sync form's data to given config."""
+        for field in self:
+            section, option = field.id.split('-', 1)
+            config.set(section, option, str(field.value))
