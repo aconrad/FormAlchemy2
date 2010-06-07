@@ -9,10 +9,12 @@ class Form(object):
     Represents a set of fields that can be rendered in one shot.
 
     Arguments:
-    default_renderer -- the renderer used if a field doesn't have a
-    renderer (default None).
-    default_validator -- the validator used if a field doesn't have a
-    validator (default None).
+    default_renderer -- the renderer to be set to a field if not
+    present (default None).
+    default_validator -- the validator to be set to a field if not
+    present (default None).
+    default_prettifyer -- the label prettifyer to be set to a field if
+    not present (default None).
 
     """
 
@@ -35,7 +37,13 @@ class Form(object):
         return len(self.fields)
 
     def append(self, field):
-        """Append a field to the form."""
+        """Append given field to the form.
+
+        If the form has a default renderer, a default validator or a
+        default prettifyer, the field will have them set if any of them
+        are missing on the field itself, respectively.
+
+        """
         if self.default_renderer and field.renderer is None:
             field.renderer = self.default_renderer
         if self.default_validator and field.validator is None:
@@ -49,7 +57,7 @@ class Form(object):
         del self.fields[field.id]
 
     def data(self):
-        """Return a dict containing all fields ids and values."""
+        """Return a dict of all fields ids and values."""
         return dict((field.id, field.value) for field in self)
 
     def validate(self, data):

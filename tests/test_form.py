@@ -85,7 +85,8 @@ class TestForm(TestCase):
         form.append(field)
         field = Field('bar', validator=validator)
         form.append(field)
-        assert form.validate({'foo': '10', 'bar': '3'}) == {'foo': 10, 'bar': 3}
+        data = {'foo': '10', 'bar': '3'}
+        assert form.validate(data) == {'foo': 10, 'bar': 3}
 
     def test_form_data(self):
         form = Form()

@@ -4,7 +4,6 @@ from unittest import TestCase
 from ConfigParser import SafeConfigParser
 
 from formalchemy2.forms.config import ConfigForm
-from formalchemy2.exceptions import NoRendererError
 
 
 class TestConfigForm(TestCase):

@@ -14,7 +14,8 @@ class ConfigForm(Form):
     config -- a ConfigParser instance
 
     Keyword arguments:
-    sections -- an iterable of section names to be included
+    sections -- an iterable of section names to be included (default
+    None)
 
     """
     def __init__(self, config, sections=None, *args, **kwargs):
