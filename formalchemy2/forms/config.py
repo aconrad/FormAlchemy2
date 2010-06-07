@@ -20,7 +20,6 @@ class ConfigForm(Form):
     """
     def __init__(self, config, sections=None, *args, **kwargs):
         super(ConfigForm, self).__init__(*args, **kwargs)
-        self.config = config
 
         # Put all fields when no section is given
         if sections is None:
