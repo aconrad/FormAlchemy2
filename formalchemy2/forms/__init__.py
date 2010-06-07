@@ -56,25 +56,21 @@ class Form(object):
         """Remove field from the form."""
         del self.fields[field.id]
 
-    def data(self):
-        """Return a dict of all fields ids and values."""
+    def _get_data(self):
         return dict((field.id, field.value) for field in self)
 
-    def validate(self, data):
-        """Validate input data against form fields and return a dict
-        containing field ids and their validated values.
-
-        Arguments:
-        data -- a dict of field ids and values to validate. Typically
-        the content of an HTTP POST request.
-
-        """
-        self.input_data = data
-
-        validation = {}
+    def _set_data(self, data):
         for field in self:
-            validation[field.id] = field.validate(data[field.id])
-        return validation
+            field.value = data[field.id]
+
+    data = property(_get_data, _set_data, None, "Return a dict of all fields "
+                    "ids and values. A similar dict can be given to set field "
+                    "values all in once.")
+
+    def validate(self):
+        """Validate all field values."""
+        for field in self:
+            field.validate()
 
     def render(self):
         """Return all fields rendered and concatenated."""

@@ -62,22 +62,23 @@ class TestField(TestCase):
 
     def test_field_validator_no_validator(self):
         field = Field('id')
-        self.assertRaises(NoValidatorError, field.validate, 'fake value')
+        self.assertRaises(NoValidatorError, field.validate)
 
     def test_field_validator_fail(self):
-        validator = lambda x: int(x)
-        field = Field('id', validator=validator)
-        self.assertRaises(ValueError, field.validate, 'a')
+        validator = int
+        field = Field('id', value='a', validator=validator)
+        self.assertRaises(ValueError, field.validate)
 
     def test_field_validator_success(self):
-        validator = lambda x: int(x)
-        field = Field('id', validator=validator)
-        assert field.validate('10') == 10
+        validator = int
+        field = Field('id', value='10', validator=validator)
+        field.validate()
+        assert field.value == 10
 
-    def test_field_value_validation(self):
-        validator = lambda x: int(x)
+    def test_field_none_value_validation(self):
+        validator = int
         field = Field('id', validator=validator)
-        field.validate('10')
+        self.assertRaises(TypeError, field.validate)
         assert field.value is None
 
     def test_field_prettifyer(self):

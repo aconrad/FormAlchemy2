@@ -85,8 +85,9 @@ class TestForm(TestCase):
         form.append(field)
         field = Field('bar', validator=validator)
         form.append(field)
-        data = {'foo': '10', 'bar': '3'}
-        assert form.validate(data) == {'foo': 10, 'bar': 3}
+        form.data = {'foo': '10', 'bar': '3'}
+        form.validate()
+        assert form.data == {'foo': 10, 'bar': 3}
 
     def test_form_data(self):
         form = Form()
@@ -94,7 +95,7 @@ class TestForm(TestCase):
         form.append(field)
         field = Field('bar', value='Bar')
         form.append(field)
-        assert form.data() == {'foo': 'Foo', 'bar': 'Bar'}
+        assert form.data == {'foo': 'Foo', 'bar': 'Bar'}
 
     def test_render_with_no_default_renderer(self):
         form = Form()
@@ -115,14 +116,17 @@ class TestForm(TestCase):
         form = Form()
         field = Field('foo')
         form.append(field)
-        self.assertRaises(NoValidatorError, form.validate, {'foo': '10'})
+        form.data = {'foo': '10'}
+        self.assertRaises(NoValidatorError, form.validate)
 
     def test_validate_with_default_validator(self):
         validator = int
         form = Form(default_validator=validator)
         field = Field('foo')
         form.append(field)
-        assert form.validate({'foo': '10'}) == {'foo': 10}
+        form.data = {'foo': '10'}
+        form.validate()
+        assert form.data == {'foo': 10}
 
     def test_default_prettifyer(self):
         prettifyer = lambda txt: txt.replace('_', ' ').capitalize()

@@ -40,8 +40,8 @@ class Field(object):
 
     label = property(_get_label, _set_label)
 
-    def validate(self, value):
-        """Validate given value against validator.
+    def validate(self):
+        """Validate and update field value against validator.
 
         Raise NoValidatorError if no validator was set.
 
@@ -49,7 +49,7 @@ class Field(object):
         if self.validator is None:
             raise NoValidatorError('Field %s has no validator assigned.' %
                                    self.id)
-        return self.validator(value)
+        self.value = self.validator(self.value)
 
     def render(self):
         """Shortcut for field.renderer.render().
