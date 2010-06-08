@@ -12,14 +12,6 @@ def serialize_id(section, option):
     return SECTION_OPTION_SEP.join([section, option])
 
 
-def deserialize_id(id):
-    """Return a tuple (section, option) given an id serialized by
-    serialize_id().
-
-    """
-    return id.split(SECTION_OPTION_SEP, 1)
-
-
 class ConfigForm(Form):
     """The Config form.
 
@@ -50,6 +42,10 @@ class ConfigForm(Form):
 
     def sync(self, config):
         """Sync form's data to given config."""
-        for field in self:
-            section, option = deserialize_id(field.id)
-            config.set(section, option, str(field.value))
+        # Iterate over each config options and verify it is part of the form.
+        for section in config.sections():
+            for option, value in config.items(section):
+                field_id = serialize_id(section, option)
+                if field_id in self.fields:
+                    field = self.fields[field_id]
+                    config.set(section, option, str(field.value))

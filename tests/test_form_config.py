@@ -3,6 +3,7 @@
 from unittest import TestCase
 from ConfigParser import SafeConfigParser
 
+from formalchemy2.fields import Field
 from formalchemy2.forms.config import ConfigForm
 
 
@@ -46,7 +47,11 @@ class TestConfigForm(TestCase):
 
     def test_validate_and_sync(self):
         form = ConfigForm(self.config, sections=['foo'], default_validator=int)
-        data = {'foo-foo_option1': '10', 'foo-foo_option2': '3'}
+        # Put some non-config fields in the form
+        field = Field('_method', value='PUT', validator=str)
+        form.append(field)
+        data = {'foo-foo_option1': '10', 'foo-foo_option2': '3',
+                '_method': 'PUT'}
         form.data = data
         form.validate()
         form.sync(self.config)
