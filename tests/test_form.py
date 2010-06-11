@@ -22,7 +22,6 @@ class TestForm(TestCase):
         assert form.default_renderer is None
         assert form.default_validator is None
         assert form.default_prettifyer is None
-        assert form.input_data is None
 
     def test_init_with_args(self):
         renderer = DummyRenderer()
@@ -33,7 +32,6 @@ class TestForm(TestCase):
         assert form.default_renderer is renderer
         assert form.default_validator is validator
         assert form.default_prettifyer is prettifyer
-        assert form.input_data is None
 
     def test_add_field_to_form(self):
         form = Form()
