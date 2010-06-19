@@ -15,10 +15,12 @@ class Field(object):
     renderer -- a renderer for this field (default None)
     validator -- a validator for this field (default None)
     prettifyer -- a label prettifyer (default None)
+    required -- set field requireness (default False)
 
     """
     def __init__(self, id, label=None, value=None, choices=None,
-                 renderer=None, validator=None, prettifyer=None):
+                 renderer=None, validator=None, prettifyer=None,
+                 required=False):
         self.id = id
         self.label = label
         self.value = value
@@ -26,6 +28,7 @@ class Field(object):
         self.renderer = renderer
         self.validator = validator
         self.prettifyer = prettifyer
+        self.required = required
 
     def _get_label(self):
         if self.prettifyer:
