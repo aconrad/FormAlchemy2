@@ -17,9 +17,6 @@ class Form(object):
     not present (default None).
 
     """
-
-    input_data = None
-
     def __init__(self, default_renderer=None, default_validator=None,
                  default_prettifyer=None):
         self.default_renderer = default_renderer
