@@ -25,6 +25,7 @@ class TestField(TestCase):
         assert field.renderer == None
         assert field.prettifyer == None
         assert field.required == False
+        assert field.hidden == False
 
     def test_field_init_with_args(self):
         renderer = DummyRenderer()
@@ -34,7 +35,8 @@ class TestField(TestCase):
             ('N', 'shirashi saumon'),
         )
         field = Field('id', label='label', value='value', choices=menu,
-                      renderer=renderer, prettifyer=prettifyer, required=True)
+                      renderer=renderer, prettifyer=prettifyer, required=True,
+                      hidden=True)
         assert field.id == 'id'
         assert field.label == 'Label'
         assert field.value == 'value'
@@ -42,6 +44,7 @@ class TestField(TestCase):
         assert field.renderer == renderer
         assert field.prettifyer == prettifyer
         assert field.required == True
+        assert field.hidden == True
 
     def test_field_render_with_no_renderer(self):
         field = Field('id')
