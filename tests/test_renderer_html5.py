@@ -3,7 +3,8 @@
 from unittest import TestCase
 
 from formalchemy2.fields import Field
-from formalchemy2.renderers.html5 import TextInput, HiddenInput, Select
+from formalchemy2.renderers.html5 import TextInput, HiddenInput, Select,\
+    find_renderer
 
 
 class TestTextInputRenderer(TestCase):
@@ -98,3 +99,15 @@ class TestHiddenInputRenderer(TestCase):
         assert 'type=hidden' in output
         assert 'name' in output
         assert 'value="PUT"' in output
+
+class TestFindRenderer(TestCase):
+
+    def test_input_renderer(self):
+        field = Field('foo')
+        renderer = find_renderer(field)
+        assert isinstance(renderer, TextInput)
+
+    def test_select_renderer(self):
+        field = Field('foo', choices=[('foo', 'Foo')])
+        renderer = find_renderer(field)
+        assert isinstance(renderer, Select)

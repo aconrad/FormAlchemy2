@@ -3,7 +3,21 @@ from mako.template import Template
 
 from formalchemy2.renderers import BaseRenderer
 
-__all__ = [u'TextInput', u'Select', u'HiddenInput']
+__all__ = [u'find_renderer' u'TextInput', u'Select', u'HiddenInput']
+
+
+def find_renderer(field):
+    """Return a renderer.
+
+    This function attempts to find an appropriate renderer according to
+    the field's properties. It will always fallback returning the
+    TextInput renderer.
+
+    """
+    if field.choices:
+        return Select()
+
+    return TextInput()
 
 
 class MakoRenderer(BaseRenderer):
