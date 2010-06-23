@@ -14,6 +14,8 @@ def find_renderer(field):
     TextInput renderer.
 
     """
+    if field.hidden:
+        return HiddenInput()
     if field.choices:
         return Select()
 

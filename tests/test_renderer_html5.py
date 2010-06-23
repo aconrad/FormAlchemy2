@@ -111,3 +111,8 @@ class TestFindRenderer(TestCase):
         field = Field('foo', choices=[('foo', 'Foo')])
         renderer = find_renderer(field)
         assert isinstance(renderer, Select)
+
+    def test_hidden_renderer(self):
+        field = Field('foo', hidden=True)
+        renderer = find_renderer(field)
+        assert isinstance(renderer, HiddenInput)
