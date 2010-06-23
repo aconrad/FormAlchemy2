@@ -16,11 +16,14 @@ class TextInput(MakoRenderer):
 
     WIDGET = u"""\
 <label for=${field.id}>${field.label}</label>
+<input type=text id=${field.id} name=${field.id} \\
 % if field.value:
-<input type=text id=${field.id} name=${field.id} value="${field.value}"/>
-% else:
-<input type=text id=${field.id} name=${field.id}/>
+value="${field.value}" \\
 % endif
+% if field.required:
+required \\
+% endif
+/>
 """
 
     template = Template(WIDGET)
@@ -29,11 +32,11 @@ class TextInput(MakoRenderer):
 class HiddenInput(MakoRenderer):
 
     WIDGET = u"""\
+<input type=hidden id=${field.id} name=${field.id} \\
 % if field.value:
-<input type=hidden id=${field.id} name=${field.id} value="${field.value}"/>
-% else:
-<input type=hidden id=${field.id} name=${field.id}/>
+value="${field.value}" \\
 % endif
+/>
 """
 
     template = Template(WIDGET)
@@ -45,6 +48,9 @@ class Select(MakoRenderer):
 <label for=${field.id}>${field.label}</label>
 <select id=${field.id} name=${field.id}>
 % for (id, name) in field.choices:
+  % if not field.required:
+  <option value="" />
+  % endif
   % if field.value == id:
   <option value="${id}" selected>${name}</option>
   % else:

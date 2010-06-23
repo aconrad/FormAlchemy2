@@ -19,6 +19,7 @@ class TestTextInputRenderer(TestCase):
         assert 'label' in output
         assert 'name' in output
         assert 'value' not in output
+        assert 'required' not in output
 
     def test_output_with_value(self):
         renderer = self.Renderer()
@@ -29,6 +30,12 @@ class TestTextInputRenderer(TestCase):
         assert 'label' in output
         assert 'name' in output
         assert 'value="foo"' in output
+
+    def test_required_field(self):
+        renderer = self.Renderer()
+        field = Field('id', value='value', renderer=renderer, required=True)
+        output = field.render()
+        assert 'required' in output
 
 
 class TestSelectRenderer(TestCase):
@@ -55,6 +62,21 @@ class TestSelectRenderer(TestCase):
         assert '<select' in output
         assert 'option' in output
         assert 'value="foo" selected' in output
+
+    def test_output_with_required(self):
+        renderer = self.Renderer()
+        choices = [('foo', 'Foo')]
+        # Test not required
+        field = Field('id', value='foo', choices=choices, renderer=renderer,
+                      required=False)
+        output = field.render()
+        assert '<option value="" />' in output
+
+        # Test required
+        field = Field('id', value='foo', choices=choices, renderer=renderer,
+                      required=True)
+        output = field.render()
+        assert '<option value="" />' not in output
 
 
 class TestHiddenInputRenderer(TestCase):
